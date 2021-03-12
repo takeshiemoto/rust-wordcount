@@ -4,7 +4,6 @@ import { Route, Link } from 'react-router-dom';
 import { environment } from '../environments/environment';
 
 export function App() {
-  console.log({ environment });
   return (
     <>
       <div role="navigation">
