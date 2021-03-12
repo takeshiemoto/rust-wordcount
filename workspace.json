@@ -122,6 +122,80 @@
           }
         }
       }
+    },
+    "firebase-example": {
+      "root": "apps/firebase-example",
+      "sourceRoot": "apps/firebase-example/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/firebase-example",
+            "index": "apps/firebase-example/src/index.html",
+            "main": "apps/firebase-example/src/main.tsx",
+            "polyfills": "apps/firebase-example/src/polyfills.ts",
+            "tsConfig": "apps/firebase-example/tsconfig.app.json",
+            "assets": [
+              "apps/firebase-example/src/favicon.ico",
+              "apps/firebase-example/src/assets"
+            ],
+            "styles": [],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/firebase-example/src/environments/environment.ts",
+                  "with": "apps/firebase-example/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "firebase-example:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "firebase-example:build:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/firebase-example/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/firebase-example"],
+          "options": {
+            "jestConfig": "apps/firebase-example/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }
