@@ -1,15 +1,29 @@
 import React, { VFC } from 'react';
-import { decrement, increment } from '../redux/counter.slice';
+import { decrement, increment, selectCount } from '../redux/counter.slice';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 
+type Prop = {
+  count: number;
+  onIncrement: () => void;
+  onDecrement: () => void;
+};
+export const Component: VFC<Prop> = ({ count, onIncrement, onDecrement }) => (
+  <div>
+    <div>count: {count}</div>
+    <button onClick={onIncrement}>+</button>
+    <button onClick={onDecrement}>-</button>
+  </div>
+);
+
 export const Counter: VFC = () => {
-  const count = useAppSelector((state) => state.counter.value);
+  const count = useAppSelector(selectCount);
   const dispatch = useAppDispatch();
+
   return (
-    <div>
-      <div>count: {count}</div>
-      <button onClick={() => dispatch(increment())}>+</button>
-      <button onClick={() => dispatch(decrement())}>-</button>
-    </div>
+    <Component
+      count={count}
+      onIncrement={() => dispatch(increment())}
+      onDecrement={() => dispatch(decrement())}
+    />
   );
 };
