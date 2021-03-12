@@ -1,4 +1,5 @@
 import 'firebase/auth';
+import 'firebase/firestore';
 import fb from 'firebase/app';
 
 import { environment } from '../environments/environment';
