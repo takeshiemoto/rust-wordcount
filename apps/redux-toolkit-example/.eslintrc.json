@@ -5,7 +5,7 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "parserOptions": {
-        "project": ["apps/redux-toolkit-example/tsconfig.*?.json"]
+        "project": ["apps/redux-toolkit-example/tsconfig.(base|lib).json"]
       },
       "rules": {}
     },
