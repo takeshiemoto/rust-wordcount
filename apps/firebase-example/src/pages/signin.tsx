@@ -1,16 +1,17 @@
 import React, { VFC } from 'react';
 import { auth } from '../infra/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { ActionButton, Flex, View } from '@adobe/react-spectrum';
+import { Redirect } from 'react-router-dom';
 
 export const Signin: VFC = () => {
   const [user, loading, error] = useAuthState(auth);
 
   const signin = () => {
-    auth.signInWithEmailAndPassword('', '');
-  };
-
-  const signout = () => {
-    auth.signOut();
+    auth.signInWithEmailAndPassword(
+      'private.takeshiemoto@gmail.com',
+      'wal24debby'
+    );
   };
 
   if (loading) {
@@ -22,15 +23,14 @@ export const Signin: VFC = () => {
   }
 
   return (
-    <div>
-      {user ? (
-        <div>
-          <p>Hello {user.uid}</p>
-          <button onClick={signout}>ログアウト</button>
-        </div>
+    <Flex minHeight={'100vh'} justifyContent={'center'} alignItems={'center'}>
+      {!user ? (
+        <View>
+          <ActionButton onPress={signin}>Signin</ActionButton>
+        </View>
       ) : (
-        <button onClick={signin}>Signin</button>
+        <Redirect to={'/'} />
       )}
-    </div>
+    </Flex>
   );
 };
