@@ -27,6 +27,7 @@
   },
   "private": true,
   "dependencies": {
+    "@adobe/react-spectrum": "^3.8.0",
     "@reduxjs/toolkit": "1.4.0",
     "core-js": "^3.6.5",
     "document-register-element": "1.13.1",
