@@ -1,4 +1,4 @@
-import { Flex, View, Link } from '@adobe/react-spectrum';
+import { Flex, Link, View } from '@adobe/react-spectrum';
 import React, { ReactNode, VFC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 

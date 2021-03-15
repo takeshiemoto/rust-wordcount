@@ -1,12 +1,12 @@
-import React from 'react';
-
-import { Route } from 'react-router-dom';
-import { Signin } from '../pages/signin';
-import { Mypage } from '../pages/mypage';
-import { Provider, defaultTheme } from '@adobe/react-spectrum';
-
 import '../assets/styles.scss';
+
+import { defaultTheme, Provider } from '@adobe/react-spectrum';
+import React from 'react';
+import { Route } from 'react-router-dom';
+
+import { Mypage } from '../pages/mypage';
 import { Root } from '../pages/root';
+import { Signin } from '../pages/signin';
 
 export function App() {
   return (

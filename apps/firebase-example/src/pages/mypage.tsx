@@ -1,7 +1,8 @@
 import React, { VFC } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../infra/firebase';
+
 import { Layout } from '../components/layout';
+import { auth } from '../infra/firebase';
 
 export const Mypage: VFC = () => {
   const [user] = useAuthState(auth);
