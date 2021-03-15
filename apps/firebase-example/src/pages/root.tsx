@@ -1,4 +1,10 @@
-import { Flex, ProgressCircle, View } from '@adobe/react-spectrum';
+import {
+  ActionButton,
+  Flex,
+  Heading,
+  ProgressCircle,
+  View,
+} from '@adobe/react-spectrum';
 import React, { VFC } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
@@ -6,15 +12,23 @@ import { Layout } from '../components/layout';
 import { auth } from '../infra/firebase';
 
 export const Root: VFC = () => {
-  const [user, loading] = useAuthState(auth);
-  if (loading) {
-    return (
-      <Flex minHeight={'100vh'} justifyContent={'center'} alignItems={'center'}>
+  const [user] = useAuthState(auth);
+  return (
+    <Layout user={user}>
+      <Flex
+        justifyContent={'center'}
+        alignItems={'center'}
+        direction={'column'}
+      >
+        <Heading level={3}>Hello</Heading>
         <View>
-          <ProgressCircle aria-label={'loading'} isIndeterminate />
+          {user && (
+            <ActionButton onPress={() => auth.signOut()}>
+              ログアウト
+            </ActionButton>
+          )}
         </View>
       </Flex>
-    );
-  }
-  return <Layout user={user}>ようこそ</Layout>;
+    </Layout>
+  );
 };
