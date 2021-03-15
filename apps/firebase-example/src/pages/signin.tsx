@@ -1,8 +1,9 @@
-import React, { VFC } from 'react';
-import { auth } from '../infra/firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { ActionButton, Flex, View } from '@adobe/react-spectrum';
+import React, { VFC } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Redirect } from 'react-router-dom';
+
+import { auth } from '../infra/firebase';
 
 export const Signin: VFC = () => {
   const [user, loading, error] = useAuthState(auth);
