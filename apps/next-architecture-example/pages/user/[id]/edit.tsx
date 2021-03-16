@@ -38,9 +38,23 @@ const UserEdit: VFC = () => {
     }
   }, [setValue, user]);
 
-  const onValid: SubmitHandler<FormType> = ({ name }) => {
-    // TODO Update API
-    console.log(name);
+  const onValid: SubmitHandler<FormType> = async ({ name }) => {
+    try {
+      const response = await fetch(`http://localhost:1323/users/${id}`, {
+        body: JSON.stringify({ name }),
+        method: 'put',
+        headers: {
+          'content-type': 'application/json',
+        },
+      });
+
+      const responseBody: User = await response.json();
+      console.log(responseBody);
+
+      await router.push('/user/list');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   if (!user && !error) {
