@@ -18,6 +18,12 @@
         "style": "styled-components",
         "linter": "eslint"
       }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "styled-components",
+        "linter": "eslint"
+      }
     }
   },
   "projects": {
@@ -193,6 +199,51 @@
           "options": {
             "jestConfig": "apps/firebase-example/jest.config.js",
             "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "next-architecture-example": {
+      "root": "apps/next-architecture-example",
+      "sourceRoot": "apps/next-architecture-example",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "root": "apps/next-architecture-example",
+            "outputPath": "dist/apps/next-architecture-example"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "next-architecture-example:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "next-architecture-example:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "next-architecture-example:build:production"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/next-architecture-example/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         }
       }

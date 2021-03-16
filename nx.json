@@ -32,6 +32,9 @@
     },
     "firebase-example": {
       "tags": []
+    },
+    "next-architecture-example": {
+      "tags": []
     }
   }
 }
