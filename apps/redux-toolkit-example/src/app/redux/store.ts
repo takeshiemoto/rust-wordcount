@@ -1,6 +1,7 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { USER_FEATURE_KEY, userReducer } from './user.slice';
+
 import { COUNTER_FEATURE_KEY, counterReducer } from './counter.slice';
+import { USER_FEATURE_KEY, userReducer } from './user.slice';
 
 export const store = configureStore({
   reducer: {

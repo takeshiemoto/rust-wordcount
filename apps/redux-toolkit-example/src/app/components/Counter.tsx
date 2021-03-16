@@ -1,6 +1,7 @@
 import React, { VFC } from 'react';
+
 import { decrement, increment, selectCount } from '../redux/counter.slice';
-import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 
 type Prop = {
   count: number;

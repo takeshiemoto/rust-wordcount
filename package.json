@@ -8,7 +8,7 @@
     "start:nae": "nx serve next-architecture-example",
     "build": "nx build",
     "test": "nx test",
-    "lint": "nx workspace-lint && nx lint",
+    "lint": "nx workspace-lint && nx lint --fix",
     "e2e": "nx e2e",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
