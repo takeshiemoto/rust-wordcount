@@ -1,19 +1,10 @@
 import Link from 'next/link';
 import React, { VFC } from 'react';
-import useSWR, { mutate } from 'swr';
 
-import { Book } from '../../type/api/book';
+import { useBooks } from '../../hooks/useBooks';
 
 const BookList: VFC = () => {
-  const fetcher = (url) => fetch(url).then((r) => r.json());
-  const { data: books, error } = useSWR<Array<Book>>(
-    'http://localhost:1323/books',
-    fetcher
-  );
-
-  if (!books && !error) {
-    return <div>Loading...</div>;
-  }
+  const { books, loading, mutate } = useBooks();
 
   const handleDelete = async (id: number) => {
     try {
@@ -28,6 +19,10 @@ const BookList: VFC = () => {
       console.log(error);
     }
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>

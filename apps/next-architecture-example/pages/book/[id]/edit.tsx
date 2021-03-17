@@ -2,9 +2,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
 import React, { useEffect, VFC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import useSWR from 'swr';
 import { object, string } from 'yup';
 
+import { useBook } from '../../../hooks/useBook';
 import { Book } from '../../../type/api/book';
 
 type FormType = {
@@ -17,13 +17,9 @@ const schema = object().shape({
 
 const BookEdit: VFC = () => {
   const router = useRouter();
-  const id = router.query['id'];
+  const id = Number(router.query['id']);
 
-  const fetcher = (url) => fetch(url).then((r) => r.json());
-  const { data: book, error } = useSWR<Book>(
-    id ? `http://localhost:1323/books/${id}` : null,
-    fetcher
-  );
+  const { book, loading } = useBook(id);
 
   const { register, setValue, handleSubmit } = useForm<FormType>({
     defaultValues: {
@@ -57,7 +53,7 @@ const BookEdit: VFC = () => {
     }
   };
 
-  if (!book && !error) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 

@@ -1,21 +1,16 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import useSWR from 'swr';
 
-import { Book } from '../../../type/api/book';
+import { useBook } from '../../../hooks/useBook';
 
 const BookDetail = () => {
   const router = useRouter();
-  const id = router.query['id'];
+  const id = Number(router.query['id']);
 
-  const fetcher = (url) => fetch(url).then((r) => r.json());
-  const { data: book, error } = useSWR<Book>(
-    id ? `http://localhost:1323/books/${id}` : null,
-    fetcher
-  );
+  const { book, loading } = useBook(id);
 
-  if (!book && !error) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
