@@ -5,68 +5,68 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import useSWR from 'swr';
 import { object, string } from 'yup';
 
-import { User } from '../../../type/api/User';
+import { Book } from '../../../type/api/book';
 
 type FormType = {
-  name: string;
+  title: string;
 };
 
 const schema = object().shape({
-  name: string(),
+  title: string(),
 });
 
-const UserEdit: VFC = () => {
+const BookEdit: VFC = () => {
   const router = useRouter();
   const id = router.query['id'];
 
   const fetcher = (url) => fetch(url).then((r) => r.json());
-  const { data: user, error } = useSWR<User>(
-    id ? `http://localhost:1323/users/${id}` : null,
+  const { data: book, error } = useSWR<Book>(
+    id ? `http://localhost:1323/books/${id}` : null,
     fetcher
   );
 
   const { register, setValue, handleSubmit } = useForm<FormType>({
     defaultValues: {
-      name: user?.name,
+      title: book?.title,
     },
     resolver: yupResolver(schema),
   });
 
   useEffect(() => {
-    if (user) {
-      setValue('name', user.name);
+    if (book) {
+      setValue('title', book.title);
     }
-  }, [setValue, user]);
+  }, [setValue, book]);
 
-  const onValid: SubmitHandler<FormType> = async ({ name }) => {
+  const onValid: SubmitHandler<FormType> = async ({ title }) => {
     try {
-      const response = await fetch(`http://localhost:1323/users/${id}`, {
-        body: JSON.stringify({ name }),
+      const response = await fetch(`http://localhost:1323/books/${id}`, {
+        body: JSON.stringify({ title }),
         method: 'put',
         headers: {
           'content-type': 'application/json',
         },
       });
 
-      const responseBody: User = await response.json();
+      const responseBody: Book = await response.json();
       console.log(responseBody);
 
-      await router.push('/user/list');
+      await router.push('/book/list');
     } catch (error) {
       console.error(error);
     }
   };
 
-  if (!user && !error) {
+  if (!book && !error) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
-      <h2>User Edit Page</h2>
+      <h2>Book Edit</h2>
       <form onSubmit={handleSubmit(onValid)}>
         <div>
-          <input type="text" ref={register} name={'name'} />
+          <input type="text" ref={register} name={'title'} />
         </div>
         <div>
           <button>保存</button>
@@ -76,4 +76,4 @@ const UserEdit: VFC = () => {
   );
 };
 
-export default UserEdit;
+export default BookEdit;

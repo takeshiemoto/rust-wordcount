@@ -2,28 +2,28 @@ import Link from 'next/link';
 import React, { VFC } from 'react';
 import useSWR, { mutate } from 'swr';
 
-import { User } from '../../type/api/User';
+import { Book } from '../../type/api/book';
 
-const UserList: VFC = () => {
+const BookList: VFC = () => {
   const fetcher = (url) => fetch(url).then((r) => r.json());
-  const { data: users, error } = useSWR<Array<User>>(
-    'http://localhost:1323/users',
+  const { data: books, error } = useSWR<Array<Book>>(
+    'http://localhost:1323/books',
     fetcher
   );
 
-  if (!users && !error) {
+  if (!books && !error) {
     return <div>Loading...</div>;
   }
 
   const handleDelete = async (id: number) => {
     try {
-      await fetch(`http://localhost:1323/users/${id}`, {
+      await fetch(`http://localhost:1323/books/${id}`, {
         method: 'delete',
       });
       /**
        * refetchしてサーバとの整合性を保つ
        */
-      await mutate('http://localhost:1323/users');
+      await mutate('http://localhost:1323/books');
     } catch (error) {
       console.log(error);
     }
@@ -31,17 +31,17 @@ const UserList: VFC = () => {
 
   return (
     <div>
-      <h2>User List Page</h2>
+      <h2>Book List</h2>
       <div>
-        <Link href={`/user/add`} passHref>
+        <Link href={`/book/add`} passHref>
           <button>追加</button>
         </Link>
       </div>
       <ul>
-        {users.map((u) => (
+        {books.map((u) => (
           <li key={u.id}>
-            <Link href={`/user/${u.id}/detail`}>{u.name}</Link>
-            <Link href={`/user/${u.id}/edit`} passHref>
+            <Link href={`/book/${u.id}/detail`}>{u.title}</Link>
+            <Link href={`/book/${u.id}/edit`} passHref>
               <button>編集</button>
             </Link>
             <button onClick={() => handleDelete(u.id)}>削除</button>
@@ -52,4 +52,4 @@ const UserList: VFC = () => {
   );
 };
 
-export default UserList;
+export default BookList;

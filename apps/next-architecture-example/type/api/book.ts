@@ -1,6 +1,6 @@
-export type User = {
+export type Book = {
   id: number;
-  name: string;
+  title: string;
   createdAt: string;
   updateAt: string;
   deletedAt: string;

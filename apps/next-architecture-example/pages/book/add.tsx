@@ -5,33 +5,33 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { object, string } from 'yup';
 
 type FormType = {
-  name: string;
+  title: string;
 };
 
 const schema = object().shape({
-  name: string(),
+  title: string(),
 });
 
-const UserAdd: VFC = () => {
+const BookAdd: VFC = () => {
   const router = useRouter();
 
   const { register, handleSubmit } = useForm<FormType>({
     resolver: yupResolver(schema),
     defaultValues: {
-      name: '',
+      title: '',
     },
   });
 
-  const onValid: SubmitHandler<FormType> = async ({ name }) => {
+  const onValid: SubmitHandler<FormType> = async ({ title }) => {
     try {
-      await fetch(`http://localhost:1323/users`, {
-        body: JSON.stringify({ name }),
+      await fetch(`http://localhost:1323/books`, {
+        body: JSON.stringify({ title: title }),
         method: 'post',
         headers: {
           'content-type': 'application/json',
         },
       });
-      router.push('/user/list');
+      router.push('/book/list');
     } catch (error) {
       console.error(error);
     }
@@ -39,13 +39,13 @@ const UserAdd: VFC = () => {
 
   return (
     <div>
-      <h2>User Add Page</h2>
+      <h2>Book Add</h2>
       <form onSubmit={handleSubmit(onValid)}>
-        <input type="text" name={'name'} ref={register} />
+        <input type="text" name={'title'} ref={register} />
         <button>追加</button>
       </form>
     </div>
   );
 };
 
-export default UserAdd;
+export default BookAdd;

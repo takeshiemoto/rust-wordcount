@@ -15,11 +15,9 @@ export const Layout: VFC<Prop> = ({ children, user }) => {
           <RouterLink to={'/'}>App</RouterLink>
         </Link>
         {user ? (
-          <>
-            <Link>
+          <Link>
               <RouterLink to={'/mypage'}>MyPage</RouterLink>
             </Link>
-          </>
         ) : (
           <Link>
             <RouterLink to={'/signin'}>Sign In</RouterLink>
