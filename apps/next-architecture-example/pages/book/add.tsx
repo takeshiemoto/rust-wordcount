@@ -4,6 +4,8 @@ import React, { VFC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { object, string } from 'yup';
 
+import { useBook } from '../../hooks/useBook';
+
 type FormType = {
   title: string;
 };
@@ -14,6 +16,7 @@ const schema = object().shape({
 
 const BookAdd: VFC = () => {
   const router = useRouter();
+  const { create } = useBook();
 
   const { register, handleSubmit } = useForm<FormType>({
     resolver: yupResolver(schema),
@@ -24,14 +27,8 @@ const BookAdd: VFC = () => {
 
   const onValid: SubmitHandler<FormType> = async ({ title }) => {
     try {
-      await fetch(`http://localhost:1323/books`, {
-        body: JSON.stringify({ title: title }),
-        method: 'post',
-        headers: {
-          'content-type': 'application/json',
-        },
-      });
-      router.push('/book/list');
+      await create({ title });
+      await router.push('/book/list');
     } catch (error) {
       console.error(error);
     }
