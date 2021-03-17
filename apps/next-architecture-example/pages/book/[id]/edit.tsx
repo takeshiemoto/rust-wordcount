@@ -19,7 +19,7 @@ const BookEdit: VFC = () => {
   const router = useRouter();
   const id = Number(router.query['id']);
 
-  const { book, loading } = useBook(id);
+  const { book, loading, edit } = useBook(id);
 
   const { register, setValue, handleSubmit } = useForm<FormType>({
     defaultValues: {
@@ -36,17 +36,7 @@ const BookEdit: VFC = () => {
 
   const onValid: SubmitHandler<FormType> = async ({ title }) => {
     try {
-      const response = await fetch(`http://localhost:1323/books/${id}`, {
-        body: JSON.stringify({ title }),
-        method: 'put',
-        headers: {
-          'content-type': 'application/json',
-        },
-      });
-
-      const responseBody: Book = await response.json();
-      console.log(responseBody);
-
+      await edit({ title });
       await router.push('/book/list');
     } catch (error) {
       console.error(error);

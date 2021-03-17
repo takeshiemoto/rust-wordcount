@@ -4,17 +4,11 @@ import React, { VFC } from 'react';
 import { useBooks } from '../../hooks/useBooks';
 
 const BookList: VFC = () => {
-  const { books, loading, mutate } = useBooks();
+  const { books, loading, remove } = useBooks();
 
   const handleDelete = async (id: number) => {
     try {
-      await fetch(`http://localhost:1323/books/${id}`, {
-        method: 'delete',
-      });
-      /**
-       * refetchしてサーバとの整合性を保つ
-       */
-      await mutate('http://localhost:1323/books');
+      await remove(id);
     } catch (error) {
       console.log(error);
     }
