@@ -4,8 +4,8 @@ import React, { useEffect, VFC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { object, string } from 'yup';
 
+import { AppLayout } from '../../../component/app/layout';
 import { useBook } from '../../../hooks/useBook';
-import { Book } from '../../../type/api/book';
 
 type FormType = {
   title: string;
@@ -48,7 +48,7 @@ const BookEdit: VFC = () => {
   }
 
   return (
-    <div>
+    <AppLayout title={`${book.title} | Edit`}>
       <h2>Book Edit</h2>
       <form onSubmit={handleSubmit(onValid)}>
         <div>
@@ -58,7 +58,7 @@ const BookEdit: VFC = () => {
           <button>保存</button>
         </div>
       </form>
-    </div>
+    </AppLayout>
   );
 };
 
