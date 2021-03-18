@@ -1,8 +1,3 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import * as cors from 'cors';
 import * as express from 'express';
 import * as jwt from 'express-jwt';
@@ -20,7 +15,7 @@ app.get('/jwt', (req, res) => {
   });
 });
 
-app.use(jwt({ secret: jwtSecret, algorithms: ['SH256'] }));
+app.use(jwt({ secret: jwtSecret, algorithms: ['HS256'] }));
 
 const foods = [
   { id: 1, description: 'burritos' },
