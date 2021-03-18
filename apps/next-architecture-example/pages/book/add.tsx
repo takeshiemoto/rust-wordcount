@@ -4,6 +4,7 @@ import React, { VFC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { object, string } from 'yup';
 
+import { AppLayout } from '../../component/app/layout';
 import { useBook } from '../../hooks/useBook';
 
 type FormType = {
@@ -35,13 +36,13 @@ const BookAdd: VFC = () => {
   };
 
   return (
-    <div>
+    <AppLayout title={'Book Add'}>
       <h2>Book Add</h2>
       <form onSubmit={handleSubmit(onValid)}>
         <input type="text" name={'title'} ref={register} />
         <button>追加</button>
       </form>
-    </div>
+    </AppLayout>
   );
 };
 

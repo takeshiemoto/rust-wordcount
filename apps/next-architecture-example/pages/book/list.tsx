@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React, { VFC } from 'react';
 
+import { AppLayout } from '../../component/app/layout';
 import { useBooks } from '../../hooks/useBooks';
 
 const BookList: VFC = () => {
@@ -19,7 +20,7 @@ const BookList: VFC = () => {
   }
 
   return (
-    <div>
+    <AppLayout title={'Book List'}>
       <h2>Book List</h2>
       <div>
         <Link href={`/book/add`} passHref>
@@ -37,7 +38,7 @@ const BookList: VFC = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </AppLayout>
   );
 };
 
