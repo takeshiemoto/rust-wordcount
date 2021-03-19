@@ -34,9 +34,7 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/redux-toolkit-example",
             "index": "apps/redux-toolkit-example/src/index.html",
@@ -97,9 +95,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/redux-toolkit-example"
-          ],
+          "outputs": ["coverage/apps/redux-toolkit-example"],
           "options": {
             "jestConfig": "apps/redux-toolkit-example/jest.config.js",
             "passWithNoTests": true
@@ -128,9 +124,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/redux-toolkit-example-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/redux-toolkit-example-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -142,9 +136,7 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/firebase-example",
             "index": "apps/firebase-example/src/index.html",
@@ -198,16 +190,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/firebase-example/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["apps/firebase-example/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/firebase-example"
-          ],
+          "outputs": ["coverage/apps/firebase-example"],
           "options": {
             "jestConfig": "apps/firebase-example/jest.config.js",
             "passWithNoTests": true
@@ -222,9 +210,7 @@
       "targets": {
         "build": {
           "executor": "@nrwl/next:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "root": "apps/next-architecture-example",
             "outputPath": "dist/apps/next-architecture-example"
@@ -270,16 +256,12 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/api",
             "main": "apps/api/src/main.ts",
             "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": [
-              "apps/api/src/assets"
-            ]
+            "assets": ["apps/api/src/assets"]
           },
           "configurations": {
             "production": {
@@ -304,9 +286,50 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/api/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/api/**/*.ts"]
+          }
+        }
+      }
+    },
+    "jwt-store": {
+      "root": "apps/jwt-store",
+      "sourceRoot": "apps/jwt-store",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "root": "apps/jwt-store",
+            "outputPath": "dist/apps/jwt-store"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "jwt-store:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "jwt-store:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "jwt-store:build:production"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/jwt-store/**/*.{ts,tsx,js,jsx}"]
           }
         }
       }

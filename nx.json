@@ -38,6 +38,9 @@
     },
     "api": {
       "tags": []
+    },
+    "jwt-store": {
+      "tags": []
     }
   }
 }
