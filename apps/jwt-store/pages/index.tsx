@@ -30,6 +30,20 @@ export function Index() {
   );
 
   useEffect(() => {
+    const checkLoggedIn = async () => {
+      try {
+        const { data } = await axios.get<{ token: string; expiry: string }>(
+          '/refresh_token'
+        );
+        setJwt(data.token);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    checkLoggedIn();
+  }, []);
+
+  useEffect(() => {
     const getCsrfToken = async () => {
       const { data } = await axios.get<{ csrfToken: string }>('/csrf-token');
       axios.defaults.headers.post['X-CSRF-Token'] = data.csrfToken;
@@ -37,9 +51,11 @@ export function Index() {
     getCsrfToken();
   }, []);
 
-  const getJwt = async () => {
+  const signin = async () => {
     setFoods([]);
-    const { data } = await axios.get<{ token: string }>(`/jwt`);
+    const { data } = await axios.get<{ token: string; expiry: string }>(
+      `/signin`
+    );
     setJwt(data.token);
   };
 
@@ -47,7 +63,9 @@ export function Index() {
     setFoods([]);
 
     try {
-      const { data } = await axios.get<Food[]>(`/foods`);
+      const { data } = await axios.get<Food[]>(`/foods`, {
+        headers: { authorization: `Bearer ${jwt}` },
+      });
       setFoods(data);
       setFetchError(undefined);
     } catch (error) {
@@ -57,7 +75,13 @@ export function Index() {
 
   const createFood = async () => {
     try {
-      const { data } = await axios.post<{ message: string }>('/foods');
+      const { data } = await axios.post<{ message: string }>(
+        '/foods',
+        undefined,
+        {
+          headers: { authorization: `Bearer ${jwt}` },
+        }
+      );
       setNewFoodMessage(data.message);
     } catch (error) {
       setFetchError(error?.message);
@@ -68,8 +92,8 @@ export function Index() {
     <Flex minHeight={'100vh'} direction={'column'}>
       <View padding={25}>
         <View>
-          <Button variant={'cta'} onPress={() => getJwt()}>
-            Get JWT
+          <Button variant={'cta'} onPress={() => signin()}>
+            Sign In
           </Button>
         </View>
         <View marginTop={20}>

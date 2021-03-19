@@ -4,10 +4,11 @@ import * as csurf from 'csurf';
 import * as express from 'express';
 import * as jwt from 'express-jwt';
 import { sign } from 'jsonwebtoken';
+import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
 
-const JWT_TOKEN_EXPIRES = 7;
+const JWT_TOKEN_EXPIRES = 1; // min
 
 app.use(cors());
 app.use(cookieParser());
@@ -23,19 +24,60 @@ app.get('/csrf-token', (req, res) => {
 
 const jwtSecret = 'secret123';
 
-app.get('/jwt', (req, res) => {
+// リフレッシュトークンを管理するサーバDB
+const refreshTokens: string[] = [];
+
+// サインイン
+app.get('/signin', (req, res) => {
+  // ユーザー情報の認証が成功したと仮定する
+
+  // リフレッシュトークンを生成
+  const refreshToken = uuidv4();
+  // リフレッシュトークンをDBに保存
+  refreshTokens.push(refreshToken);
+  // リフレッシュトークンをClientのCookieに書き込み
+  res.cookie('refresh_token', refreshToken, { httpOnly: true });
+
+  // JWTトークンを生成
   const token = sign({ user: 'Hello' }, jwtSecret, {
-    expiresIn: JWT_TOKEN_EXPIRES,
+    expiresIn: JWT_TOKEN_EXPIRES * 60,
   });
-  res.cookie('token', token, { httpOnly: true });
-  res.json({ token });
+  const expiry = new Date(new Date().getTime() + JWT_TOKEN_EXPIRES * 60 * 1000);
+
+  res.json({ token, expiry });
+});
+
+app.get('/refresh_token', (req, res) => {
+  // Cookieからrefresh_tokenを読み取る
+  const refreshToken = req.cookies['refresh_token'];
+
+  // リフレッシュトークンの存在を問い合わせる
+  if (!refreshTokens.includes(refreshToken)) {
+    res.status(401).json({
+      error: {
+        message: 'Invalid refresh token request',
+      },
+    });
+  }
+
+  // 新しいリフレッシュトークンを生成 & Cookieに保存
+  const newRefreshToken = uuidv4();
+  res.cookie('refresh_token', newRefreshToken, { httpOnly: true });
+
+  // 新しいJWTを生成
+  const newToken = sign({ user: 'Hello' }, jwtSecret, {
+    expiresIn: JWT_TOKEN_EXPIRES * 60,
+  });
+
+  const expiry = new Date(new Date().getTime() + JWT_TOKEN_EXPIRES * 60 * 1000);
+  res.json({ token: newToken, expiry });
 });
 
 app.use(
   jwt({
     secret: jwtSecret,
     algorithms: ['HS256'],
-    getToken: (req) => req.cookies.token,
+    // getToken: (req) => req.cookies.token,
   })
 );
 
