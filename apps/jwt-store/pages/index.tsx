@@ -39,12 +39,16 @@ export function Index() {
   }, []);
 
   const getJwt = async () => {
+    setFoods([]);
+
     const { data } = await axios.get<{ token: string }>(`${API_URL}/jwt`);
     localStorage.setItem('token', data.token);
     setJwt(data.token);
   };
 
   const getFoods = async () => {
+    setFoods([]);
+
     try {
       const { data } = await axios.get<Food[]>(`${API_URL}/foods`);
       setFoods(data);
@@ -61,7 +65,7 @@ export function Index() {
             Get JWT
           </Button>
         </View>
-        <View marginTop={25}>
+        <View marginTop={20}>
           {jwt && (
             <Well>
               <Text>{jwt}</Text>
@@ -73,12 +77,17 @@ export function Index() {
             Get Foods
           </Button>
         </View>
-        <View marginTop={25}>
+        <View marginTop={20}>
           <ListBox>
             {foods.map((food) => (
               <Item key={food.id}>{food.description}</Item>
             ))}
           </ListBox>
+          {fetchError && (
+            <Well>
+              <Text>{fetchError}</Text>
+            </Well>
+          )}
         </View>
       </View>
     </Flex>
