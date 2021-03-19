@@ -8,28 +8,7 @@ import { sign } from 'jsonwebtoken';
 const app = express();
 
 app.use(cors());
-
-const jwtSecret = 'secret123';
-
-app.get('/', (req, res) => {
-  res.json({ message: 'Hello API' });
-});
-
-app.get('/jwt', (req, res) => {
-  const token = sign({ user: 'Hello' }, jwtSecret);
-  res.cookie('token', token, { httpOnly: true });
-  res.json({ token });
-});
-
 app.use(cookieParser());
-app.use(
-  jwt({
-    secret: jwtSecret,
-    algorithms: ['HS256'],
-    getToken: (req) => req.cookies.token,
-  })
-);
-
 app.use(
   csurf({
     cookie: true,
@@ -39,6 +18,22 @@ app.use(
 app.get('/csrf-token', (req, res) => {
   res.json({ csrfToken: req.csrfToken() });
 });
+
+const jwtSecret = 'secret123';
+
+app.get('/jwt', (req, res) => {
+  const token = sign({ user: 'Hello' }, jwtSecret);
+  res.cookie('token', token, { httpOnly: true });
+  res.json({ token });
+});
+
+app.use(
+  jwt({
+    secret: jwtSecret,
+    algorithms: ['HS256'],
+    getToken: (req) => req.cookies.token,
+  })
+);
 
 const foods = [
   { id: 1, description: 'burritos' },
