@@ -7,6 +7,8 @@ import { sign } from 'jsonwebtoken';
 
 const app = express();
 
+const JWT_TOKEN_EXPIRES = 7;
+
 app.use(cors());
 app.use(cookieParser());
 app.use(
@@ -22,7 +24,9 @@ app.get('/csrf-token', (req, res) => {
 const jwtSecret = 'secret123';
 
 app.get('/jwt', (req, res) => {
-  const token = sign({ user: 'Hello' }, jwtSecret);
+  const token = sign({ user: 'Hello' }, jwtSecret, {
+    expiresIn: JWT_TOKEN_EXPIRES,
+  });
   res.cookie('token', token, { httpOnly: true });
   res.json({ token });
 });
