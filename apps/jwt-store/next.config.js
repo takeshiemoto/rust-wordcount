@@ -8,4 +8,16 @@ const withTM = require('next-transpile-modules')([
   '@react-spectrum/.*',
 ]);
 
-module.exports = withPlugins([withCSS, withTM], withNx({}));
+module.exports = withPlugins(
+  [withCSS, withTM],
+  withNx({
+    async rewrites() {
+      return [
+        {
+          source: '/:slug*',
+          destination: 'http://localhost:3333/:slug*',
+        },
+      ];
+    },
+  })
+);
