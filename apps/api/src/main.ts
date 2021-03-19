@@ -24,8 +24,8 @@ app.get('/csrf-token', (req, res) => {
 
 const jwtSecret = 'secret123';
 
-// リフレッシュトークンを管理するサーバDB
-const refreshTokens: string[] = [];
+// リフレッシュトークンを管理するデータベース
+const refreshTokenDatabase: Map<string, string> = new Map();
 
 // サインイン
 app.get('/signin', (req, res) => {
@@ -34,7 +34,7 @@ app.get('/signin', (req, res) => {
   // リフレッシュトークンを生成
   const refreshToken = uuidv4();
   // リフレッシュトークンをDBに保存
-  refreshTokens.push(refreshToken);
+  refreshTokenDatabase.set(refreshToken, refreshToken);
   // リフレッシュトークンをClientのCookieに書き込み
   res.cookie('refresh_token', refreshToken, { httpOnly: true });
 
@@ -50,18 +50,24 @@ app.get('/signin', (req, res) => {
 app.get('/refresh_token', (req, res) => {
   // Cookieからrefresh_tokenを読み取る
   const refreshToken = req.cookies['refresh_token'];
+  console.log(refreshTokenDatabase);
 
   // リフレッシュトークンの存在を問い合わせる
-  if (!refreshTokens.includes(refreshToken)) {
+  if (!refreshTokenDatabase.has(refreshToken)) {
     res.status(401).json({
       error: {
         message: 'Invalid refresh token request',
       },
     });
+    return;
   }
 
-  // 新しいリフレッシュトークンを生成 & Cookieに保存
+  // 新しいリフレッシュトークンを生成
   const newRefreshToken = uuidv4();
+  // トークンを更新
+  refreshTokenDatabase.delete(refreshToken);
+  refreshTokenDatabase.set(newRefreshToken, newRefreshToken);
+  // 新しいリフレッシュトークンCookieに保存
   res.cookie('refresh_token', newRefreshToken, { httpOnly: true });
 
   // 新しいJWTを生成

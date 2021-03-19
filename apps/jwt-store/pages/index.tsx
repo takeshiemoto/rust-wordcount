@@ -8,6 +8,7 @@ import {
   Well,
 } from '@adobe/react-spectrum';
 import axios from 'axios';
+import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 
 type Food = { id: number; description: string };
@@ -22,7 +23,8 @@ type Food = { id: number; description: string };
  * - ブラウザが自動でCookieが実行されるため
  */
 export function Index() {
-  const [jwt, setJwt] = useState(undefined);
+  const [jwt, setJwt] = useState<string | undefined>(undefined);
+  const [expiry, setExpiry] = useState<Date | undefined>(undefined);
   const [foods, setFoods] = useState<Food[]>([]);
   const [fetchError, setFetchError] = useState<string | undefined>(undefined);
   const [newFoodMessage, setNewFoodMessage] = useState<string | undefined>(
@@ -36,6 +38,7 @@ export function Index() {
           '/refresh_token'
         );
         setJwt(data.token);
+        setExpiry(new Date(data.expiry));
       } catch (error) {
         console.error(error);
       }
@@ -57,6 +60,7 @@ export function Index() {
       `/signin`
     );
     setJwt(data.token);
+    setExpiry(new Date(data.expiry));
   };
 
   const getFoods = async () => {
@@ -100,6 +104,11 @@ export function Index() {
           {jwt && (
             <Well>
               <Text>{jwt}</Text>
+            </Well>
+          )}
+          {expiry && (
+            <Well>
+              <Text>{format(expiry, 'yyyy-MM-dd HH:mm')}</Text>
             </Well>
           )}
         </View>
