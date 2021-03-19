@@ -8,6 +8,7 @@ import {
   Well,
 } from '@adobe/react-spectrum';
 import axios from 'axios';
+import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 
 type Food = { id: number; description: string };
@@ -22,12 +23,28 @@ type Food = { id: number; description: string };
  * - ブラウザが自動でCookieが実行されるため
  */
 export function Index() {
-  const [jwt, setJwt] = useState(undefined);
+  const [jwt, setJwt] = useState<string | undefined>(undefined);
+  const [expiry, setExpiry] = useState<Date | undefined>(undefined);
   const [foods, setFoods] = useState<Food[]>([]);
   const [fetchError, setFetchError] = useState<string | undefined>(undefined);
   const [newFoodMessage, setNewFoodMessage] = useState<string | undefined>(
     undefined
   );
+
+  useEffect(() => {
+    const checkLoggedIn = async () => {
+      try {
+        const { data } = await axios.get<{ token: string; expiry: string }>(
+          '/refresh_token'
+        );
+        setJwt(data.token);
+        setExpiry(new Date(data.expiry));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    checkLoggedIn();
+  }, []);
 
   useEffect(() => {
     const getCsrfToken = async () => {
@@ -37,17 +54,22 @@ export function Index() {
     getCsrfToken();
   }, []);
 
-  const getJwt = async () => {
+  const signin = async () => {
     setFoods([]);
-    const { data } = await axios.get<{ token: string }>(`/jwt`);
+    const { data } = await axios.get<{ token: string; expiry: string }>(
+      `/signin`
+    );
     setJwt(data.token);
+    setExpiry(new Date(data.expiry));
   };
 
   const getFoods = async () => {
     setFoods([]);
 
     try {
-      const { data } = await axios.get<Food[]>(`/foods`);
+      const { data } = await axios.get<Food[]>(`/foods`, {
+        headers: { authorization: `Bearer ${jwt}` },
+      });
       setFoods(data);
       setFetchError(undefined);
     } catch (error) {
@@ -57,7 +79,13 @@ export function Index() {
 
   const createFood = async () => {
     try {
-      const { data } = await axios.post<{ message: string }>('/foods');
+      const { data } = await axios.post<{ message: string }>(
+        '/foods',
+        undefined,
+        {
+          headers: { authorization: `Bearer ${jwt}` },
+        }
+      );
       setNewFoodMessage(data.message);
     } catch (error) {
       setFetchError(error?.message);
@@ -68,14 +96,19 @@ export function Index() {
     <Flex minHeight={'100vh'} direction={'column'}>
       <View padding={25}>
         <View>
-          <Button variant={'cta'} onPress={() => getJwt()}>
-            Get JWT
+          <Button variant={'cta'} onPress={() => signin()}>
+            Sign In
           </Button>
         </View>
         <View marginTop={20}>
           {jwt && (
             <Well>
               <Text>{jwt}</Text>
+            </Well>
+          )}
+          {expiry && (
+            <Well>
+              <Text>{format(expiry, 'yyyy-MM-dd HH:mm')}</Text>
             </Well>
           )}
         </View>
