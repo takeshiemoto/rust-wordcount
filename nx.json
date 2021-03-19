@@ -35,6 +35,12 @@
     },
     "next-architecture-example": {
       "tags": []
+    },
+    "api": {
+      "tags": []
+    },
+    "jwt-store": {
+      "tags": []
     }
   }
 }
