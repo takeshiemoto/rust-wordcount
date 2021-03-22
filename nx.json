@@ -1,46 +1,38 @@
 {
   "implicitDependencies": {
     "workspace.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
-  "affected": {
-    "defaultBase": "master"
-  },
+  "affected": { "defaultBase": "master" },
   "npmScope": "react-toybox",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "build-storybook"
+        ]
       }
     }
   },
   "projects": {
-    "redux-toolkit-example": {
-      "tags": []
-    },
+    "redux-toolkit-example": { "tags": [] },
     "redux-toolkit-example-e2e": {
       "tags": [],
       "implicitDependencies": ["redux-toolkit-example"]
     },
-    "firebase-example": {
-      "tags": []
-    },
-    "next-architecture-example": {
-      "tags": []
-    },
-    "api": {
-      "tags": []
-    },
-    "jwt-store": {
-      "tags": []
-    }
+    "firebase-example": { "tags": [] },
+    "next-architecture-example": { "tags": [] },
+    "api": { "tags": [] },
+    "jwt-store": { "tags": [] },
+    "story-book-tutorial": { "tags": [] }
   }
 }
