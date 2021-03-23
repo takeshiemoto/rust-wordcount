@@ -3,5 +3,6 @@ module.exports = {
     '<rootDir>/apps/redux-toolkit-example',
     '<rootDir>/apps/firebase-example',
     '<rootDir>/apps/next-apollo-client',
+    '<rootDir>/apps/nest-graphql-api',
   ],
 };
