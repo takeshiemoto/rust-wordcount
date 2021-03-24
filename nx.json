@@ -7,7 +7,7 @@
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
-  "affected": { "defaultBase": "master" },
+  "affected": { "defaultBase": "main" },
   "npmScope": "react-toybox",
   "tasksRunnerOptions": {
     "default": {
@@ -33,6 +33,8 @@
     "next-architecture-example": { "tags": [] },
     "api": { "tags": [] },
     "jwt-store": { "tags": [] },
-    "story-book-tutorial": { "tags": [] }
+    "story-book-tutorial": { "tags": [] },
+    "next-apollo-client": { "tags": [] },
+    "nest-graphql-api": { "tags": [] }
   }
 }
