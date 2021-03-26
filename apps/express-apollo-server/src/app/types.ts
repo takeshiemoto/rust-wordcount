@@ -4,6 +4,7 @@ export type Photo = {
   description?: string;
   category: 'SELFIE' | 'PORTRAIT' | 'ACTION' | 'LANDSCAPE' | 'GRAPHIC';
   githubUser: string;
+  created: Date | string;
 };
 
 export type User = {

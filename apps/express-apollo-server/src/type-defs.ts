@@ -5,6 +5,7 @@ import { gql } from 'apollo-server-express';
  * - リゾルバはスキーマ内のオブジェクトと同じtypename（この例だとtotalPhotos）として定義
  */
 export const typeDefs = gql`
+  scalar DateTime
   type User {
     githubLogin: ID!
     name: String
@@ -20,6 +21,7 @@ export const typeDefs = gql`
     category: PhotoCategory!
     postedBy: User!
     taggedUser: [User!]!
+    created: DateTime
   }
   enum PhotoCategory {
     SELFIE
@@ -35,7 +37,7 @@ export const typeDefs = gql`
   }
   type Query {
     totalPhotos: Int!
-    allPhotos: [Photo!]!
+    allPhotos(after: DateTime): [Photo!]!
   }
   type Mutation {
     postPhoto(input: PostPhotoInput): Photo!
