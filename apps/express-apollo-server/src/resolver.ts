@@ -1,11 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { PHOTOS, USERS } from './data';
+import { PHOTOS, TAGS, USERS } from './data';
 import { Photo } from './types';
 
 // 仮のデータベース
 const photoDB = [...PHOTOS];
 const usersDB = [...USERS];
+const tagsDB = [...TAGS];
 
 export const resolvers = {
   Query: {
@@ -35,10 +36,21 @@ export const resolvers = {
     postedBy: (parent) => {
       return usersDB.find((u) => u.githubLogin === parent.githubUser);
     },
+    taggedUser: (parent) =>
+      tagsDB
+        .filter((tag) => tag.photoID === parent.id)
+        .map((tag) => tag.userID)
+        .map((userId) => usersDB.find((u) => u.githubLogin === userId)),
   },
   User: {
     postedPhotos: (parent) => {
       return photoDB.filter((p) => p.githubUser === parent.githubLogin);
+    },
+    inPhotos: (parent) => {
+      return tagsDB
+        .filter((tag) => tag.userID === parent.id)
+        .map((tag) => tag.photoID)
+        .map((photoId) => photoDB.find((p) => p.id === photoId));
     },
   },
 };

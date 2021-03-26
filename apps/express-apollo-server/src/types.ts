@@ -10,3 +10,8 @@ export type User = {
   githubLogin: string;
   name: string;
 };
+
+export type Tag = {
+  photoID: string;
+  userID: string;
+};

@@ -10,13 +10,7 @@ export const typeDefs = gql`
     name: String
     avatar: String
     postedPhotos: [Photo!]!
-  }
-  enum PhotoCategory {
-    SELFIE
-    PORTRAIT
-    ACTION
-    LANDSCAPE
-    GRAPHIC
+    inPhotos: [Photo!]!
   }
   type Photo {
     id: ID!
@@ -25,6 +19,14 @@ export const typeDefs = gql`
     description: String
     category: PhotoCategory!
     postedBy: User!
+    taggedUser: [User!]!
+  }
+  enum PhotoCategory {
+    SELFIE
+    PORTRAIT
+    ACTION
+    LANDSCAPE
+    GRAPHIC
   }
   input PostPhotoInput {
     name: String!

@@ -1,4 +1,4 @@
-import { Photo, User } from './types';
+import { Photo, Tag, User } from './types';
 
 const USERS: User[] = [
   { githubLogin: 'mHattrup', name: 'Mike Hattrup' },
@@ -29,4 +29,11 @@ const PHOTOS: Photo[] = [
   },
 ];
 
-export { PHOTOS, USERS };
+const TAGS: Tag[] = [
+  { photoID: '1', userID: 'gPlake' },
+  { photoID: '2', userID: 'sSchmidt' },
+  { photoID: '2', userID: 'mHattrup' },
+  { photoID: '2', userID: 'gPlake' },
+];
+
+export { PHOTOS, TAGS, USERS };
