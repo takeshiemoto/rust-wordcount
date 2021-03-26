@@ -34,7 +34,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/redux-toolkit-example",
             "index": "apps/redux-toolkit-example/src/index.html",
@@ -95,7 +97,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/redux-toolkit-example"],
+          "outputs": [
+            "coverage/apps/redux-toolkit-example"
+          ],
           "options": {
             "jestConfig": "apps/redux-toolkit-example/jest.config.js",
             "passWithNoTests": true
@@ -124,7 +128,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/redux-toolkit-example-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/redux-toolkit-example-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
@@ -136,7 +142,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/firebase-example",
             "index": "apps/firebase-example/src/index.html",
@@ -190,12 +198,16 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/firebase-example/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "apps/firebase-example/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/firebase-example"],
+          "outputs": [
+            "coverage/apps/firebase-example"
+          ],
           "options": {
             "jestConfig": "apps/firebase-example/jest.config.js",
             "passWithNoTests": true
@@ -210,7 +222,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/next:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "root": "apps/next-architecture-example",
             "outputPath": "dist/apps/next-architecture-example"
@@ -256,12 +270,16 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/api",
             "main": "apps/api/src/main.ts",
             "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
+            "assets": [
+              "apps/api/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -286,7 +304,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/api/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/api/**/*.ts"
+            ]
           }
         }
       }
@@ -298,7 +318,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/next:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "root": "apps/jwt-store",
             "outputPath": "dist/apps/jwt-store"
@@ -329,7 +351,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/jwt-store/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "apps/jwt-store/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         }
       }
@@ -341,7 +365,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/story-book-tutorial",
             "index": "apps/story-book-tutorial/src/index.html",
@@ -417,7 +443,9 @@
         },
         "build-storybook": {
           "executor": "@nrwl/storybook:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "uiFramework": "@storybook/react",
             "outputPath": "dist/storybook/story-book-tutorial",
@@ -441,12 +469,16 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/nest-graphql-api",
             "main": "apps/nest-graphql-api/src/main.ts",
             "tsConfig": "apps/nest-graphql-api/tsconfig.app.json",
-            "assets": ["apps/nest-graphql-api/src/assets"]
+            "assets": [
+              "apps/nest-graphql-api/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -471,12 +503,16 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/nest-graphql-api/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/nest-graphql-api/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/nest-graphql-api"],
+          "outputs": [
+            "coverage/apps/nest-graphql-api"
+          ],
           "options": {
             "jestConfig": "apps/nest-graphql-api/jest.config.js",
             "passWithNoTests": true
@@ -491,7 +527,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/next:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "root": "apps/next-with-nrql",
             "outputPath": "dist/apps/next-with-nrql"
@@ -522,7 +560,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/next-with-nrql"],
+          "outputs": [
+            "coverage/apps/next-with-nrql"
+          ],
           "options": {
             "jestConfig": "apps/next-with-nrql/jest.config.js",
             "passWithNoTests": true
@@ -531,7 +571,116 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/next-with-nrql/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "apps/next-with-nrql/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        }
+      }
+    },
+    "next-apollo": {
+      "root": "apps/next-apollo",
+      "sourceRoot": "apps/next-apollo",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "root": "apps/next-apollo",
+            "outputPath": "dist/apps/next-apollo"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "next-apollo:build",
+            "dev": true,
+            "proxyConfig": "apps/next-apollo/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "next-apollo:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "next-apollo:build:production"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/next-apollo"
+          ],
+          "options": {
+            "jestConfig": "apps/next-apollo/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/next-apollo/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        }
+      }
+    },
+    "express-apollo-server": {
+      "root": "apps/express-apollo-server",
+      "sourceRoot": "apps/express-apollo-server/src",
+      "projectType": "application",
+      "prefix": "express-apollo-server",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/express-apollo-server",
+            "main": "apps/express-apollo-server/src/main.ts",
+            "tsConfig": "apps/express-apollo-server/tsconfig.app.json",
+            "assets": [
+              "apps/express-apollo-server/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/express-apollo-server/src/environments/environment.ts",
+                  "with": "apps/express-apollo-server/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "express-apollo-server:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/express-apollo-server/**/*.ts"
+            ]
           }
         }
       }

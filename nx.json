@@ -56,6 +56,12 @@
     },
     "next-with-nrql": {
       "tags": []
+    },
+    "next-apollo": {
+      "tags": []
+    },
+    "express-apollo-server": {
+      "tags": []
     }
   }
 }
