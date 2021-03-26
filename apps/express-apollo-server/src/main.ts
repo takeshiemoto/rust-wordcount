@@ -7,10 +7,23 @@ import { v4 as uuidv4 } from 'uuid';
  * - リゾルバはスキーマ内のオブジェクトと同じtypename（この例だとtotalPhotos）として定義
  */
 const typeDefs = gql`
+  enum PhotoCategory {
+    SELFIE
+    PORTRAIT
+    ACTION
+    LANDSCAPE
+    GRAPHIC
+  }
   type Photo {
     id: ID!
     url: String!
     name: String!
+    description: String
+    category: PhotoCategory!
+  }
+  input PostPhotoInput {
+    name: String!
+    category: PhotoCategory = PORTRAIT
     description: String
   }
   type Query {
@@ -18,34 +31,45 @@ const typeDefs = gql`
     allPhotos: [Photo!]!
   }
   type Mutation {
-    postPhoto(name: String!, description: String!): Photo!
+    postPhoto(input: PostPhotoInput): Photo!
   }
 `;
 
-type Photo = { name: string; description: string };
 // TypeScriptの型定義
+type Photo = {
+  name: string;
+  description: string;
+  category: 'SELFIE' | 'PORTRAIT' | 'ACTION' | 'LANDSCAPE' | 'GRAPHIC';
+};
 
 // 仮のデータベース
 const photoDB = new Map<string, Photo>();
+export const findAllPhoto = () => Array.from(photoDB, ([_, photo]) => photo);
 
 const resolvers = {
   Query: {
-    totalPhotos: () => 42,
-    allPhotos: () => Array.from(photoDB, ([_, photo]) => photo),
+    totalPhotos: () => findAllPhoto().length,
+    allPhotos: () => findAllPhoto(),
   },
   Mutation: {
     /**
      * @param parent 親オブジェクトへの参照
      * @param args ClientからのVariable
      */
-    postPhoto(parent, args: Photo): Photo {
+    postPhoto(parent, args: { input: Photo }): Photo {
       const id = uuidv4();
-      const newPhoto = { id, ...args };
+      const newPhoto = { id, ...args.input };
 
       photoDB.set(id, newPhoto);
 
       return newPhoto;
     },
+  },
+  Photo: {
+    /**
+     * クエリでurlを選択すると対応するリゾルバ関数が呼び出される
+     */
+    url: (parent: { id: string }) => `http://yoursite.com/img/${parent.id}.jpg`,
   },
 };
 
