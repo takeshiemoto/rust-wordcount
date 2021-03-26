@@ -535,6 +535,101 @@
           }
         }
       }
+    },
+    "next-apollo": {
+      "root": "apps/next-apollo",
+      "sourceRoot": "apps/next-apollo",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "root": "apps/next-apollo",
+            "outputPath": "dist/apps/next-apollo"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "next-apollo:build",
+            "dev": true,
+            "proxyConfig": "apps/next-apollo/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "next-apollo:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "next-apollo:build:production"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/next-apollo"],
+          "options": {
+            "jestConfig": "apps/next-apollo/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/next-apollo/**/*.{ts,tsx,js,jsx}"]
+          }
+        }
+      }
+    },
+    "express-apollo-server": {
+      "root": "apps/express-apollo-server",
+      "sourceRoot": "apps/express-apollo-server/src",
+      "projectType": "application",
+      "prefix": "express-apollo-server",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/express-apollo-server",
+            "main": "apps/express-apollo-server/src/main.ts",
+            "tsConfig": "apps/express-apollo-server/tsconfig.app.json",
+            "assets": ["apps/express-apollo-server/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/express-apollo-server/src/environments/environment.ts",
+                  "with": "apps/express-apollo-server/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "express-apollo-server:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/express-apollo-server/**/*.ts"]
+          }
+        }
+      }
     }
   }
 }
