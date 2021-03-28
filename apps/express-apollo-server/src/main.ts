@@ -9,6 +9,9 @@ import { typeDefs } from './type-defs';
 const start = async () => {
   const app = express();
 
+  /**
+   * @see https://cloud.mongodb.com/v2/60608b905e106469dad7c1f6#clusters
+   */
   const DB_URL = process.env.NX_DB_URL;
   const client = await MongoClient.connect(DB_URL, {
     useNewUrlParser: true,
