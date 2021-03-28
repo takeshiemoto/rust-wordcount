@@ -35,11 +35,17 @@ export const typeDefs = gql`
     category: PhotoCategory = PORTRAIT
     description: String
   }
+  input UpdateNameInput {
+    id: ID!
+    name: String!
+  }
   type Query {
     totalPhotos: Int!
     allPhotos(after: DateTime): [Photo!]!
+    photoById(id: ID!): Photo!
   }
   type Mutation {
     postPhoto(input: PostPhotoInput): Photo!
+    updatePhotoName(input: UpdateNameInput): Photo!
   }
 `;

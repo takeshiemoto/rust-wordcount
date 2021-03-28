@@ -16,4 +16,12 @@ export const Mutation = {
 
     return newPhoto;
   },
+  updatePhotoName(
+    parent,
+    args: { input: { id: string; name: string } }
+  ): Photo {
+    const idx = PHOTOS.findIndex((p) => p.id === args.input.id);
+    PHOTOS[idx] = { ...PHOTOS[idx], name: args.input.name };
+    return PHOTOS[idx];
+  },
 };

@@ -12,4 +12,7 @@ export const Query = {
       isAfter(new Date(p.created), new Date(args.after))
     );
   },
+  photoById(_, args: { id: string }) {
+    return PHOTOS.find((p) => p.id === args.id);
+  },
 };
