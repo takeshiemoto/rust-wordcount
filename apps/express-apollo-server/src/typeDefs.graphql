@@ -1,19 +1,15 @@
-import { gql } from 'apollo-server-express';
+scalar DateTime
 
-/**
- * - クエリを作成する場合は必ず同じ名前のリゾルバ関数を定義する
- * - リゾルバはスキーマ内のオブジェクトと同じtypename（この例だとtotalPhotos）として定義
- */
-export const typeDefs = gql`
-  scalar DateTime
-  type User {
+
+type User {
     githubLogin: ID!
     name: String
     avatar: String
     postedPhotos: [Photo!]!
     inPhotos: [Photo!]!
-  }
-  type Photo {
+}
+
+type Photo {
     id: ID!
     url: String!
     name: String!
@@ -22,24 +18,26 @@ export const typeDefs = gql`
     postedBy: User!
     taggedUser: [User!]!
     created: DateTime
-  }
-  enum PhotoCategory {
+}
+
+enum PhotoCategory {
     SELFIE
     PORTRAIT
     ACTION
     LANDSCAPE
     GRAPHIC
-  }
-  input PostPhotoInput {
+}
+
+input PostPhotoInput {
     name: String!
     category: PhotoCategory = PORTRAIT
     description: String
-  }
-  type Query {
+}
+
+type Query {
     totalPhotos: Int!
     allPhotos(after: DateTime): [Photo!]!
-  }
-  type Mutation {
+}
+type Mutation {
     postPhoto(input: PostPhotoInput): Photo!
-  }
-`;
+}
