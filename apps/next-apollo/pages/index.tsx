@@ -37,9 +37,7 @@ export function Index() {
       <Link href={'/add'}>New</Link>
       <ul>
         {data.allPhotos.map((p) => (
-          <li key={p.id}>
-            <Link href={`/photo/${p.id}`}>{p.name}</Link>
-          </li>
+          <li key={p.id}>{p.name}</li>
         ))}
       </ul>
       <button onClick={() => refetch()}>ReFetch</button>
