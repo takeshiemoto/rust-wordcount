@@ -1,6 +1,7 @@
 import { GraphQLScalarType } from 'graphql';
+import { v4 as uuidv4 } from 'uuid';
 
-import { Photo, Resolvers, User } from './types/genereted';
+import { Photo, PhotoCategory, Resolvers, User } from './types/genereted';
 
 export const resolvers: Resolvers = {
   Query: {
@@ -13,11 +14,6 @@ export const resolvers: Resolvers = {
     allUsers: (parent, args, context) =>
       context.db.collection('users').find().toArray(),
   },
-  Mutation: {
-    postPhoto: () => {
-      return {} as Photo;
-    },
-  },
   Photo: {
     url: (parent) => `http://yoursite.com/img/${parent.id}.jpg`,
     postedBy: () => {
@@ -29,6 +25,20 @@ export const resolvers: Resolvers = {
     //     .map((tag) => tag.userID)
     //     .map((userId) => USERS.find((u) => u.githubLogin === userId)),
     taggedUser: () => [],
+  },
+  Mutation: {
+    postPhoto: async (parent, args, { db }) => {
+      const result = await db.collection<Photo>('photos').insertOne({
+        id: uuidv4(),
+        name: args.input.name,
+        description: args.input.description,
+        category: PhotoCategory.Action,
+        postedBy: undefined,
+        taggedUser: undefined,
+        url: '',
+      });
+      return result.ops[0];
+    },
   },
   User: {
     // postedPhotos: (parent) => {
