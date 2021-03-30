@@ -1,4 +1,4 @@
-import { gql, NetworkStatus, useMutation, useQuery } from '@apollo/client';
+import { gql, NetworkStatus, useQuery, useMutation } from '@apollo/client';
 import Link from 'next/link';
 import React from 'react';
 
@@ -34,6 +34,7 @@ export function Index() {
   return (
     <div>
       <h2>Photo Gallery</h2>
+      <Link href={'/add'}>New</Link>
       <ul>
         {data.allPhotos.map((p) => (
           <li key={p.id}>
