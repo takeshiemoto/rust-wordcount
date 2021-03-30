@@ -3,7 +3,7 @@ import * as express from 'express';
 import expressPlayground from 'graphql-playground-middleware-express';
 import { MongoClient } from 'mongodb';
 
-import { resolvers } from './app/resolvers';
+import { resolvers } from './resolver';
 import { typeDefs } from './type-defs';
 
 const start = async () => {

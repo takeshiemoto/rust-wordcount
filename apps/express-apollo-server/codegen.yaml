@@ -1,9 +1,10 @@
 overwrite: true
 generates:
   apps/express-apollo-server/src/types/genereted.ts:
-    schema: 'apps/express-apollo-server/src/type-defs.ts'
+    schema: apps/express-apollo-server/src/type-defs.ts
     config:
       useIndexSignature: true
+      contextType: ../context#Context
     plugins:
       - typescript
       - typescript-resolvers

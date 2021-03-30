@@ -1,6 +1,6 @@
 import { GraphQLScalarType } from 'graphql';
 
-import { Photo, Resolvers, User } from '../../types/genereted';
+import { Photo, Resolvers, User } from './types/genereted';
 
 export const resolvers: Resolvers = {
   Query: {
