@@ -1,6 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
-import React, { useState, VFC } from 'react';
 import { useRouter } from 'next/router';
+import React, { useState, VFC } from 'react';
 
 const ADD_PHOTO = gql`
   mutation newPhoto($input: PostPhotoInput!) {
