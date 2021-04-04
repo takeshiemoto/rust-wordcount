@@ -3,6 +3,8 @@ generates:
   apps/express-apollo-server/src/types/genereted.ts:
     schema: apps/express-apollo-server/src/type-defs.ts
     config:
+      scalars:
+        DateTime: Date
       useIndexSignature: true
       contextType: ../context#Context
     plugins:

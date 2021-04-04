@@ -1,7 +1,20 @@
-import { GraphQLScalarType } from 'graphql';
+import { GraphQLScalarType, GraphQLScalarTypeConfig, Kind } from 'graphql';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Photo, PhotoCategory, Resolvers, User } from './types/genereted';
+
+const config: GraphQLScalarTypeConfig<Date, string> = {
+  name: `DateTime`,
+  description: `A valid date time value.`,
+  parseValue: (value: string) => new Date(value),
+  serialize: (value: string) => new Date(value).toISOString(),
+  parseLiteral: (ast) => {
+    if (ast.kind === Kind.STRING) {
+      return new Date(ast.value);
+    }
+    return null;
+  },
+};
 
 export const resolvers: Resolvers = {
   Query: {
@@ -52,11 +65,5 @@ export const resolvers: Resolvers = {
     //     .map((photoId) => PHOTOS.find((p) => p.id === photoId));
     // },
   },
-  DateTime: new GraphQLScalarType({
-    name: `DateTime`,
-    description: `A valid date time value.`,
-    parseValue: (value) => new Date(value),
-    serialize: (value) => new Date(value).toISOString(),
-    parseLiteral: (ast: any) => ast.value,
-  }),
+  DateTime: new GraphQLScalarType(config),
 };
