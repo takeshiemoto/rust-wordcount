@@ -19,6 +19,10 @@ export const firebase = !fb.apps.length
 export const auth = firebase.auth();
 export const db = firebase.firestore();
 
+export const KEYS = {
+  BOOKINGS: 'bookings',
+} as const;
+
 export type BookingFields = {
   id?: string;
   name: string;

@@ -1,5 +1,5 @@
 export type Booking = {
-  id: string;
+  id?: string;
   name: string;
   date: Date;
 };

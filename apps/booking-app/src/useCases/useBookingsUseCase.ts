@@ -3,9 +3,8 @@ import { bookingPresenter } from './presenter/bookingPresenter';
 
 export const useBookingsUseCase = () => {
   const { bookings, loading, error } = useBookings();
-
   return {
-    bookings: bookings.map(bookingPresenter),
+    bookings: bookings && bookings.map(bookingPresenter),
     loading,
     error,
   };
