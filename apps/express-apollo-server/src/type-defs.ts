@@ -1,9 +1,5 @@
 import { gql } from 'apollo-server-express';
 
-/**
- * - クエリを作成する場合は必ず同じ名前のリゾルバ関数を定義する
- * - リゾルバはスキーマ内のオブジェクトと同じtypename（この例だとtotalPhotos）として定義
- */
 export const typeDefs = gql`
   scalar DateTime
   type User {
@@ -37,7 +33,9 @@ export const typeDefs = gql`
   }
   type Query {
     totalPhotos: Int!
-    allPhotos(after: DateTime): [Photo!]!
+    allPhotos: [Photo!]!
+    totalUsers: Int!
+    allUsers: [User!]!
   }
   type Mutation {
     postPhoto(input: PostPhotoInput): Photo!

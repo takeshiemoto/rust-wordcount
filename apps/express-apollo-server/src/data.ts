@@ -1,12 +1,10 @@
-import { Photo, Tag, User } from './types';
-
-const USERS: User[] = [
+const USERS = [
   { githubLogin: 'mHattrup', name: 'Mike Hattrup' },
   { githubLogin: 'gPlake', name: 'Glen Plake' },
   { githubLogin: 'sSchmidt', name: 'Scot Schmidt' },
 ];
 
-const PHOTOS: Photo[] = [
+const PHOTOS = [
   {
     id: '1',
     name: 'Dropping the Heart Chute',
@@ -32,7 +30,7 @@ const PHOTOS: Photo[] = [
   },
 ];
 
-const TAGS: Tag[] = [
+const TAGS = [
   { photoID: '1', userID: 'gPlake' },
   { photoID: '2', userID: 'sSchmidt' },
   { photoID: '2', userID: 'mHattrup' },
