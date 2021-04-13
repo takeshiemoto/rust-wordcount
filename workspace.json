@@ -630,6 +630,49 @@
           }
         }
       }
+    },
+    "booking-app": {
+      "root": "apps/booking-app",
+      "sourceRoot": "apps/booking-app",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "root": "apps/booking-app",
+            "outputPath": "dist/apps/booking-app"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "booking-app:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "booking-app:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "booking-app:build:production"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/booking-app/**/*.{ts,tsx,js,jsx}"]
+          }
+        }
+      }
     }
   }
 }
