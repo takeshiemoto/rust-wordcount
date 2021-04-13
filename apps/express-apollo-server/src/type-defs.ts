@@ -39,5 +39,10 @@ export const typeDefs = gql`
   }
   type Mutation {
     postPhoto(input: PostPhotoInput): Photo!
+    githubAuth(code: String!): AuthPayload!
+  }
+  type AuthPayload {
+    token: String!
+    user: User!
   }
 `;

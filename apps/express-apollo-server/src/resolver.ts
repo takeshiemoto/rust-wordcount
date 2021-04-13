@@ -1,6 +1,7 @@
 import { GraphQLScalarType, GraphQLScalarTypeConfig, Kind } from 'graphql';
 import { v4 as uuidv4 } from 'uuid';
 
+import { DB_KEYS } from './constatns';
 import { Photo, PhotoCategory, Resolvers, User } from './types/genereted';
 
 const config: GraphQLScalarTypeConfig<Date, string> = {
@@ -19,13 +20,13 @@ const config: GraphQLScalarTypeConfig<Date, string> = {
 export const resolvers: Resolvers = {
   Query: {
     totalPhotos: (parent, args, context) =>
-      context.db.collection('photos').estimatedDocumentCount(),
+      context.db.collection(DB_KEYS.PHOTOS).estimatedDocumentCount(),
     allPhotos: (parent, args, context) =>
-      context.db.collection('photos').find().toArray(),
+      context.db.collection(DB_KEYS.PHOTOS).find().toArray(),
     totalUsers: (parent, args, context) =>
-      context.db.collection('users').estimatedDocumentCount(),
+      context.db.collection(DB_KEYS.PHOTOS).estimatedDocumentCount(),
     allUsers: (parent, args, context) =>
-      context.db.collection('users').find().toArray(),
+      context.db.collection(DB_KEYS.PHOTOS).find().toArray(),
   },
   Photo: {
     url: (parent) => `http://yoursite.com/img/${parent.id}.jpg`,
