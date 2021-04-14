@@ -19,8 +19,8 @@ export const useBookingsRepository = (): {
     bookings:
       bookings &&
       bookings.map(({ date, id, name }) => ({
-        id: id,
-        name: name,
+        id,
+        name,
         date: date.toDate(),
       })),
     loading,
