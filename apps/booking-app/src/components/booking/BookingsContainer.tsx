@@ -1,5 +1,4 @@
-import { Box, Button, List, ListItem } from '@material-ui/core';
-import Link from 'next/link';
+import { Box, List, ListItem } from '@material-ui/core';
 import React, { VFC } from 'react';
 
 import { useBookingsUseCase } from '../../useCases/useBookingsUseCase';
@@ -13,7 +12,9 @@ export const BookingsContainer: VFC = () => {
       <List>
         {!loading &&
           bookings.map((booking) => (
-            <ListItem key={booking.id}>{booking.name}</ListItem>
+            <ListItem key={booking.id}>
+              {booking.name} ({booking.date.toISOString()})
+            </ListItem>
           ))}
       </List>
     </Box>
