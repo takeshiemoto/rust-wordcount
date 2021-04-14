@@ -1,17 +1,11 @@
 import './styles.css';
 
-import {
-  AppBar,
-  Button,
-  Toolbar,
-  Typography,
-  createMuiTheme,
-  ThemeProvider,
-} from '@material-ui/core';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import Link from 'next/link';
 import React, { useEffect } from 'react';
+
+import { Container as Header } from '../ui/domain/header/Container';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   const theme = createMuiTheme({ palette: { type: 'dark' } });
@@ -34,19 +28,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <ThemeProvider theme={theme}>
-        <AppBar color={'inherit'} position={'static'}>
-          <Toolbar>
-            <Link href={'/'} passHref>
-              <Button color={'default'}>Nextjs Booking App</Button>
-            </Link>
-            <Link href={'/booking/list'} passHref>
-              <Button color={'default'}>Booking List</Button>
-            </Link>
-            <Link href={'/booking/new'} passHref>
-              <Button color={'default'}>New Booking</Button>
-            </Link>
-          </Toolbar>
-        </AppBar>
+        <Header />
         <Component {...pageProps} />
       </ThemeProvider>
     </>

@@ -1,14 +1,11 @@
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 
-import { useBookingNew } from '../adapters/repositories/useBookingNew';
+import { useBookingNew } from '../adapter/repository/useBookingNew';
 import { bookingNewController } from './controller/bookingNewController';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-export type FormType = {
-  name: string;
-  date: string;
-};
+import { FormType } from '../ui/domain/bookings/types';
 
 export const useBookingNewUseCase = () => {
   const router = useRouter();

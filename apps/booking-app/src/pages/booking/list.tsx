@@ -1,9 +1,9 @@
 import React, { VFC } from 'react';
 
-import { BookingsContainer } from '../../components/booking/BookingsContainer';
+import { Container } from '../../ui/domain/bookings/Container';
 
 const BookingList: VFC = () => {
-  return <BookingsContainer />;
+  return <Container />;
 };
 
 export default BookingList;

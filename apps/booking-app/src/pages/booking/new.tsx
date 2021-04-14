@@ -1,7 +1,7 @@
 import { Box, Typography } from '@material-ui/core';
 import React, { VFC } from 'react';
 
-import { useBookingNewUseCase } from '../../useCases/useBookingNewUseCase';
+import { useBookingNewUseCase } from '../../useCase/useBookingNewUseCase';
 
 const BookingNew: VFC = () => {
   const { submit, register } = useBookingNewUseCase();

@@ -1,7 +1,7 @@
 import { parse } from 'date-fns';
 
-import { Booking } from '../../domains/booking/type';
-import { FormType } from '../useBookingNewUseCase';
+import { Booking } from '../../domain/booking/type';
+import { FormType } from '../../ui/domain/bookings/types';
 
 export const bookingNewController = ({ date, name }: FormType): Booking => {
   return {

@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
-import { Booking } from '../../domains/booking/type';
-import { db, KEYS } from '../infrastructures/firebase';
+import { Booking } from '../../domain/booking/type';
+import { db, KEYS } from '../infrastructur/firebase';
 
 export const useBookingNew = () => {
   const [state, setState] = useState<{
