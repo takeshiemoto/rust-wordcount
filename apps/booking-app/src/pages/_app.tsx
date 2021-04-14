@@ -1,13 +1,21 @@
 import './styles.css';
 
-import { AppBar, ThemeProvider, Toolbar, Typography } from '@material-ui/core';
+import {
+  AppBar,
+  Button,
+  Toolbar,
+  Typography,
+  createMuiTheme,
+  ThemeProvider,
+} from '@material-ui/core';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import Link from 'next/link';
 import React, { useEffect } from 'react';
 
-import { theme } from '../theme';
-
 function CustomApp({ Component, pageProps }: AppProps) {
+  const theme = createMuiTheme({ palette: { type: 'dark' } });
+
   useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
@@ -26,9 +34,17 @@ function CustomApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <ThemeProvider theme={theme}>
-        <AppBar position={'static'}>
+        <AppBar color={'inherit'} position={'static'}>
           <Toolbar>
-            <Typography variant={'h6'}>Nextjs Booking App</Typography>
+            <Link href={'/'} passHref>
+              <Button color={'default'}>Nextjs Booking App</Button>
+            </Link>
+            <Link href={'/booking/list'} passHref>
+              <Button color={'default'}>Booking List</Button>
+            </Link>
+            <Link href={'/booking/new'} passHref>
+              <Button color={'default'}>New Booking</Button>
+            </Link>
           </Toolbar>
         </AppBar>
         <Component {...pageProps} />

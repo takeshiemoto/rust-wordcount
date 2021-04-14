@@ -1,14 +1,11 @@
-import { Button } from '@material-ui/core';
+import { Box, Button, Typography } from '@material-ui/core';
 import React from 'react';
 
 export function Index() {
   return (
-    <div>
-      <p>{process.env.FIREBASE_APP_ID}</p>
-      <Button color={'secondary'} variant={'outlined'}>
-        Hello world
-      </Button>
-    </div>
+    <Box px={4} py={4}>
+      <Typography variant={'h6'}>Booking App</Typography>
+    </Box>
   );
 }
 

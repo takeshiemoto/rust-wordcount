@@ -8,9 +8,6 @@ export const BookingsContainer: VFC = () => {
   const { bookings, loading, error } = useBookingsUseCase();
   return (
     <Box pt={4} px={4}>
-      <Link href={'/booking/new'}>
-        <Button variant={'outlined'}>New Booking</Button>
-      </Link>
       {loading && <div>Loading...</div>}
       {!loading && error && <div>Error: {JSON.stringify(error)}</div>}
       <List>
