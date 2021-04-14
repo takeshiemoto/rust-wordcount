@@ -1,16 +1,15 @@
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 
-import { useBookingNew } from '../adapter/repository/useBookingNew';
-import { bookingNewController } from './controller/bookingNewController';
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-
+import { useBookingNewRepository } from '../adapter/repository/useBookingNewRepository';
 import { FormType } from '../ui/domain/bookings/types';
+import { bookingNewController } from './controller/bookingNewController';
 
 export const useBookingNewUseCase = () => {
   const router = useRouter();
   const { handleSubmit, register } = useForm<FormType>();
-  const { createBooking, data, error } = useBookingNew();
+  const { createBooking, data, error } = useBookingNewRepository();
 
   useEffect(() => {
     if (data) {

@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { Booking } from '../../domain/booking/type';
 import { db, KEYS } from '../infrastructur/firebase';
 
-export const useBookingNew = () => {
+export const useBookingNewRepository = () => {
   const [state, setState] = useState<{
     data?: { id: string };
     loading: boolean;

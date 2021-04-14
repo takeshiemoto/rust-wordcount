@@ -1,8 +1,8 @@
-import { useBookings } from '../adapter/repository/useBookings';
+import { useBookingsRepository } from '../adapter/repository/useBookingsRepository';
 import { bookingPresenter } from './presenter/bookingPresenter';
 
 export const useBookingsUseCase = () => {
-  const { bookings, loading, error } = useBookings();
+  const { bookings, loading, error } = useBookingsRepository();
   return {
     bookings: bookings && bookings.map(bookingPresenter),
     loading,

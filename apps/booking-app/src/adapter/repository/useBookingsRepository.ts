@@ -3,7 +3,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { Booking } from '../../domain/booking/type';
 import { BookingFields, db, KEYS } from '../infrastructur/firebase';
 
-export const useBookings = (): {
+export const useBookingsRepository = (): {
   bookings: Booking[];
   loading: boolean;
   error: Error;
@@ -14,7 +14,7 @@ export const useBookings = (): {
       idField: 'id',
     }
   );
-  /** Firestoreの場合、DBの型からDomainの型への変換を許容する */
+  /** RepositoryはDBの特殊な型からEntity型への変換を許容する */
   return {
     bookings:
       bookings &&
