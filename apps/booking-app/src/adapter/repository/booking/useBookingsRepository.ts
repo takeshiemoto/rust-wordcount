@@ -1,7 +1,7 @@
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-import { Booking } from '../../domain/booking/type';
-import { BookingFields, db, KEYS } from '../infrastructur/firebase';
+import { Booking } from '../../../domain/booking/type';
+import { BookingFields, db, KEYS } from '../../infrastructur/firebase';
 
 export const useBookingsRepository = (): {
   bookings: Booking[];

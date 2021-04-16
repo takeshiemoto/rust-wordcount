@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 
-import { useBookingNewRepository } from '../adapter/repository/useBookingNewRepository';
+import { useBookingNewRepository } from '../adapter/repository/booking/useBookingNewRepository';
 import { FormType } from '../ui/domain/bookings/types';
 import { bookingNewController } from './controller/bookingNewController';
 

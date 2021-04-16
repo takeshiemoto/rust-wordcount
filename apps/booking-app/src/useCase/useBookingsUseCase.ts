@@ -1,4 +1,4 @@
-import { useBookingsRepository } from '../adapter/repository/useBookingsRepository';
+import { useBookingsRepository } from '../adapter/repository/booking/useBookingsRepository';
 import { bookingPresenter } from './presenter/bookingPresenter';
 
 export const useBookingsUseCase = () => {
