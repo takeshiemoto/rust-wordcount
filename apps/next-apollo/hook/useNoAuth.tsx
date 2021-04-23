@@ -1,20 +1,17 @@
-import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+
+import { useCurrentUser } from './useCurrentUser';
 
 export const useNoAuth = () => {
   const router = useRouter();
 
-  const { data, loading } = useQuery(gql`
-    query IsLoggedIn {
-      isLoggedIn @client
-    }
-  `);
+  const { user, loading } = useCurrentUser();
 
   useEffect(() => {
     if (loading) return;
-    if (data.isLoggedIn) {
+    if (user.isLoggedIn) {
       router.push('/');
     }
-  }, [data, loading, router]);
+  }, [user, loading, router]);
 };
