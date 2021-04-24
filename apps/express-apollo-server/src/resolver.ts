@@ -2,6 +2,7 @@ import { GraphQLScalarType, GraphQLScalarTypeConfig, Kind } from 'graphql';
 import { v4 as uuidv4 } from 'uuid';
 
 import { DB_KEYS } from './constatns';
+import { authorizeWithGithub } from './functions';
 import { Photo, PhotoCategory, Resolvers, User } from './types/genereted';
 
 const config: GraphQLScalarTypeConfig<Date, string> = {
@@ -41,6 +42,39 @@ export const resolvers: Resolvers = {
     taggedUser: () => [],
   },
   Mutation: {
+    githubAuth: async (parent, { code }, { db }) => {
+      const {
+        message,
+        access_token,
+        avatar_url,
+        login,
+        name,
+      } = await authorizeWithGithub({
+        client_id: '26b0bc1027a8ec1f4e14',
+        client_secret: 'b18a561867e1af642846e78b95b76d2a590d78b2',
+        code,
+      });
+      if (message) {
+        throw new Error(message);
+      }
+      const latestUserInfo = {
+        name,
+        githubLogin: login,
+        githubToken: access_token,
+        avatar: avatar_url,
+      };
+
+      const {
+        ops: [user],
+      } = await db
+        .collection('users')
+        .replaceOne({ githubLogin: login }, latestUserInfo, { upsert: true });
+
+      return {
+        user,
+        token: access_token,
+      };
+    },
     postPhoto: async (parent, args, { db }) => {
       const result = await db.collection<Photo>('photos').insertOne({
         id: uuidv4(),
