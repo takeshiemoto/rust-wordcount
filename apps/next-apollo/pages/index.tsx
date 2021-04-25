@@ -2,6 +2,7 @@ import { gql, NetworkStatus, useApolloClient, useQuery } from '@apollo/client';
 import Link from 'next/link';
 import React from 'react';
 
+import { useCurrentUser } from '../hook/useCurrentUser';
 import { useRequireAuth } from '../hook/useRequireAuth';
 import { Photo } from '../type';
 

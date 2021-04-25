@@ -1,4 +1,5 @@
 import { GraphQLScalarType, GraphQLScalarTypeConfig, Kind } from 'graphql';
+import fetch from 'node-fetch';
 import { v4 as uuidv4 } from 'uuid';
 
 import { DB_KEYS } from './constatns';
@@ -28,12 +29,17 @@ export const resolvers: Resolvers = {
       context.db.collection(DB_KEYS.PHOTOS).estimatedDocumentCount(),
     allUsers: (parent, args, context) =>
       context.db.collection(DB_KEYS.PHOTOS).find().toArray(),
+    me: (parent, args, { currentUser }) => {
+      return currentUser;
+    },
   },
   Photo: {
-    url: (parent) => `http://yoursite.com/img/${parent.id}.jpg`,
-    postedBy: () => {
-      // return USERS.find((u) => u.githubLogin === parent.id);
-      return {} as User;
+    id: (parent) => parent.id,
+    url: (parent) => `/img/photos/${parent.id}.jpg`,
+    postedBy: (parent, args, { db }) => {
+      return db
+        .collection(DB_KEYS.USERS)
+        .findOne({ githubLogin: parent.userID });
     },
     // taggedUser: (parent) =>
     //   TAGS.filter((tag) => tag.photoID === parent.id)
@@ -42,6 +48,33 @@ export const resolvers: Resolvers = {
     taggedUser: () => [],
   },
   Mutation: {
+    addFakeUsers: async (root, { count }, { db }) => {
+      const randomUserApi = `https://randomuser.me/api/?result=${count}`;
+      const { results } = await fetch(randomUserApi).then((res) => res.json());
+      const users = results.map((r) => ({
+        githubLogin: r.login.username,
+        name: `${r.name.first} ${r.name.last}`,
+        avatar: r.picture.thumbnail,
+        githubToken: r.login.sha1,
+      }));
+      await db.collection(DB_KEYS.USERS).insertMany(users);
+
+      return users as User[];
+    },
+    fakeUserAuth: async (parent, { githubLogin }, { db }) => {
+      const user = await db
+        .collection<User>(DB_KEYS.USERS)
+        .findOne({ githubLogin });
+
+      if (!user) {
+        throw new Error(`Cannot find user with githubLogin ${githubLogin}`);
+      }
+
+      return {
+        token: user.githubToken,
+        user,
+      };
+    },
     githubAuth: async (parent, { code }, { db }) => {
       const {
         message,
@@ -50,8 +83,8 @@ export const resolvers: Resolvers = {
         login,
         name,
       } = await authorizeWithGithub({
-        client_id: '26b0bc1027a8ec1f4e14',
-        client_secret: 'b18a561867e1af642846e78b95b76d2a590d78b2',
+        client_id: process.env.NX_CLIENT_ID,
+        client_secret: process.env.NX_CLIENT_SECRET,
         code,
       });
       if (message) {
@@ -75,7 +108,10 @@ export const resolvers: Resolvers = {
         token: access_token,
       };
     },
-    postPhoto: async (parent, args, { db }) => {
+    postPhoto: async (parent, args, { db, currentUser }) => {
+      if (!currentUser) {
+        throw new Error(`only an authorize user can post a photo`);
+      }
       const result = await db.collection<Photo>('photos').insertOne({
         id: uuidv4(),
         name: args.input.name,
@@ -84,6 +120,8 @@ export const resolvers: Resolvers = {
         postedBy: undefined,
         taggedUser: undefined,
         url: '',
+        created: new Date(),
+        userID: currentUser.githubLogin,
       });
       return result.ops[0];
     },

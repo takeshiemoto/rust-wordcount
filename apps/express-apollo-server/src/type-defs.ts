@@ -4,6 +4,7 @@ export const typeDefs = gql`
   scalar DateTime
   type User {
     githubLogin: ID!
+    githubToken: String!
     name: String
     avatar: String
     postedPhotos: [Photo!]!
@@ -18,6 +19,7 @@ export const typeDefs = gql`
     postedBy: User!
     taggedUser: [User!]!
     created: DateTime
+    userID: String!
   }
   enum PhotoCategory {
     SELFIE
@@ -36,8 +38,11 @@ export const typeDefs = gql`
     allPhotos: [Photo!]!
     totalUsers: Int!
     allUsers: [User!]!
+    me: User
   }
   type Mutation {
+    addFakeUsers(count: Int = 1): [User!]
+    fakeUserAuth(githubLogin: ID!): AuthPayload!
     postPhoto(input: PostPhotoInput): Photo!
     githubAuth(code: String!): AuthPayload!
   }

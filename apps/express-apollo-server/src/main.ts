@@ -3,6 +3,7 @@ import * as express from 'express';
 import expressPlayground from 'graphql-playground-middleware-express';
 import { MongoClient } from 'mongodb';
 
+import { DB_KEYS } from './constatns';
 import { resolvers } from './resolver';
 import { typeDefs } from './type-defs';
 
@@ -18,9 +19,21 @@ const start = async () => {
     useUnifiedTopology: true,
   });
   const db = client.db();
-  const context = { db };
 
-  const server = new ApolloServer({ typeDefs, resolvers, context });
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: async ({ req }) => {
+      const githubToken = req.headers.authorization;
+      const currentUser = await db
+        .collection(DB_KEYS.USERS)
+        .findOne({ githubToken });
+      return {
+        db,
+        currentUser,
+      };
+    },
+  });
   server.applyMiddleware({ app });
 
   app.get('/api', (req, res) => {
