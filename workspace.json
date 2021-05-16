@@ -1,6 +1,8 @@
 {
   "version": 2,
-  "cli": { "defaultCollection": "@nrwl/react" },
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
   "defaultProject": "redux-toolkit-example",
   "generators": {
     "@nrwl/react": {
@@ -9,11 +11,19 @@
         "linter": "eslint",
         "babel": true
       },
-      "component": { "style": "styled-components" },
-      "library": { "style": "styled-components", "linter": "eslint" }
+      "component": {
+        "style": "styled-components"
+      },
+      "library": {
+        "style": "styled-components",
+        "linter": "eslint"
+      }
     },
     "@nrwl/next": {
-      "application": { "style": "styled-components", "linter": "eslint" }
+      "application": {
+        "style": "styled-components",
+        "linter": "eslint"
+      }
     }
   },
   "projects": {
@@ -66,7 +76,9 @@
         },
         "serve": {
           "executor": "@nrwl/web:dev-server",
-          "options": { "buildTarget": "redux-toolkit-example:build" },
+          "options": {
+            "buildTarget": "redux-toolkit-example:build"
+          },
           "configurations": {
             "production": {
               "buildTarget": "redux-toolkit-example:build:production"
@@ -166,9 +178,13 @@
         },
         "serve": {
           "executor": "@nrwl/web:dev-server",
-          "options": { "buildTarget": "firebase-example:build" },
+          "options": {
+            "buildTarget": "firebase-example:build"
+          },
           "configurations": {
-            "production": { "buildTarget": "firebase-example:build:production" }
+            "production": {
+              "buildTarget": "firebase-example:build:production"
+            }
           }
         },
         "lint": {
@@ -199,7 +215,9 @@
             "root": "apps/next-architecture-example",
             "outputPath": "dist/apps/next-architecture-example"
           },
-          "configurations": { "production": {} }
+          "configurations": {
+            "production": {}
+          }
         },
         "serve": {
           "executor": "@nrwl/next:server",
@@ -261,11 +279,15 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": { "buildTarget": "api:build" }
+          "options": {
+            "buildTarget": "api:build"
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["apps/api/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["apps/api/**/*.ts"]
+          }
         }
       }
     },
@@ -281,11 +303,16 @@
             "root": "apps/jwt-store",
             "outputPath": "dist/apps/jwt-store"
           },
-          "configurations": { "production": {} }
+          "configurations": {
+            "production": {}
+          }
         },
         "serve": {
           "executor": "@nrwl/next:server",
-          "options": { "buildTarget": "jwt-store:build", "dev": true },
+          "options": {
+            "buildTarget": "jwt-store:build",
+            "dev": true
+          },
           "configurations": {
             "production": {
               "buildTarget": "jwt-store:build:production",
@@ -295,7 +322,9 @@
         },
         "export": {
           "executor": "@nrwl/next:export",
-          "options": { "buildTarget": "jwt-store:build:production" }
+          "options": {
+            "buildTarget": "jwt-store:build:production"
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
@@ -336,11 +365,15 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": { "buildTarget": "nest-graphql-api:build" }
+          "options": {
+            "buildTarget": "nest-graphql-api:build"
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["apps/nest-graphql-api/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["apps/nest-graphql-api/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -364,7 +397,9 @@
             "root": "apps/next-apollo",
             "outputPath": "dist/apps/next-apollo"
           },
-          "configurations": { "production": {} }
+          "configurations": {
+            "production": {}
+          }
         },
         "serve": {
           "executor": "@nrwl/next:server",
@@ -382,7 +417,9 @@
         },
         "export": {
           "executor": "@nrwl/next:export",
-          "options": { "buildTarget": "next-apollo:build:production" }
+          "options": {
+            "buildTarget": "next-apollo:build:production"
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -431,7 +468,9 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": { "buildTarget": "express-apollo-server:build" }
+          "options": {
+            "buildTarget": "express-apollo-server:build"
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
@@ -453,11 +492,16 @@
             "root": "apps/booking-app",
             "outputPath": "dist/apps/booking-app"
           },
-          "configurations": { "production": {} }
+          "configurations": {
+            "production": {}
+          }
         },
         "serve": {
           "executor": "@nrwl/next:server",
-          "options": { "buildTarget": "booking-app:build", "dev": true },
+          "options": {
+            "buildTarget": "booking-app:build",
+            "dev": true
+          },
           "configurations": {
             "production": {
               "buildTarget": "booking-app:build:production",
@@ -467,7 +511,9 @@
         },
         "export": {
           "executor": "@nrwl/next:export",
-          "options": { "buildTarget": "booking-app:build:production" }
+          "options": {
+            "buildTarget": "booking-app:build:production"
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
