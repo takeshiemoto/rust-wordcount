@@ -1,13 +1,18 @@
 {
   "implicitDependencies": {
     "workspace.json": "*",
-    "package.json": { "dependencies": "*", "devDependencies": "*" },
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
-  "affected": { "defaultBase": "main" },
+  "affected": {
+    "defaultBase": "main"
+  },
   "npmScope": "react-toybox",
   "tasksRunnerOptions": {
     "default": {
@@ -24,18 +29,39 @@
     }
   },
   "projects": {
-    "redux-toolkit-example": { "tags": [] },
+    "redux-toolkit-example": {
+      "tags": []
+    },
     "redux-toolkit-example-e2e": {
       "tags": [],
       "implicitDependencies": ["redux-toolkit-example"]
     },
-    "firebase-example": { "tags": [] },
-    "next-architecture-example": { "tags": [] },
-    "api": { "tags": [] },
-    "jwt-store": { "tags": [] },
-    "nest-graphql-api": { "tags": [] },
-    "next-apollo": { "tags": [] },
-    "express-apollo-server": { "tags": [] },
-    "booking-app": { "tags": [] }
+    "firebase-example": {
+      "tags": []
+    },
+    "next-architecture-example": {
+      "tags": []
+    },
+    "api": {
+      "tags": []
+    },
+    "jwt-store": {
+      "tags": []
+    },
+    "nest-graphql-api": {
+      "tags": []
+    },
+    "next-apollo": {
+      "tags": []
+    },
+    "express-apollo-server": {
+      "tags": []
+    },
+    "booking-app": {
+      "tags": []
+    },
+    "react-router-auth": {
+      "tags": []
+    }
   }
 }
