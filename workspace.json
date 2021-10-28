@@ -27,104 +27,131 @@
     }
   },
   "projects": {
-    "redux-toolkit-example": {
-      "root": "apps/redux-toolkit-example",
-      "sourceRoot": "apps/redux-toolkit-example/src",
+    "api": {
+      "root": "apps/api",
+      "sourceRoot": "apps/api/src",
       "projectType": "application",
+      "prefix": "api",
       "targets": {
         "build": {
-          "executor": "@nrwl/web:build",
+          "executor": "@nrwl/node:build",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/apps/redux-toolkit-example",
-            "index": "apps/redux-toolkit-example/src/index.html",
-            "main": "apps/redux-toolkit-example/src/main.tsx",
-            "polyfills": "apps/redux-toolkit-example/src/polyfills.ts",
-            "tsConfig": "apps/redux-toolkit-example/tsconfig.app.json",
-            "assets": [
-              "apps/redux-toolkit-example/src/favicon.ico",
-              "apps/redux-toolkit-example/src/assets"
-            ],
-            "styles": [],
-            "scripts": [],
-            "webpackConfig": "@nrwl/react/plugins/webpack"
+            "outputPath": "dist/apps/api",
+            "main": "apps/api/src/main.ts",
+            "tsConfig": "apps/api/tsconfig.app.json",
+            "assets": ["apps/api/src/assets"]
           },
           "configurations": {
             "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
               "fileReplacements": [
                 {
-                  "replace": "apps/redux-toolkit-example/src/environments/environment.ts",
-                  "with": "apps/redux-toolkit-example/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "replace": "apps/api/src/environments/environment.ts",
+                  "with": "apps/api/src/environments/environment.prod.ts"
                 }
               ]
             }
           }
         },
         "serve": {
-          "executor": "@nrwl/web:dev-server",
+          "executor": "@nrwl/node:execute",
           "options": {
-            "buildTarget": "redux-toolkit-example:build"
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "redux-toolkit-example:build:production"
-            }
+            "buildTarget": "api:build"
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/redux-toolkit-example/**/*.{ts,tsx,js,jsx}"
-            ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/redux-toolkit-example"],
-          "options": {
-            "jestConfig": "apps/redux-toolkit-example/jest.config.js",
-            "passWithNoTests": true
+            "lintFilePatterns": ["apps/api/**/*.ts"]
           }
         }
       }
     },
-    "redux-toolkit-example-e2e": {
-      "root": "apps/redux-toolkit-example-e2e",
-      "sourceRoot": "apps/redux-toolkit-example-e2e/src",
+    "booking-app": {
+      "root": "apps/booking-app",
+      "sourceRoot": "apps/booking-app",
       "projectType": "application",
       "targets": {
-        "e2e": {
-          "executor": "@nrwl/cypress:cypress",
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
           "options": {
-            "cypressConfig": "apps/redux-toolkit-example-e2e/cypress.json",
-            "tsConfig": "apps/redux-toolkit-example-e2e/tsconfig.e2e.json",
-            "devServerTarget": "redux-toolkit-example:serve"
+            "root": "apps/booking-app",
+            "outputPath": "dist/apps/booking-app"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "booking-app:build",
+            "dev": true
           },
           "configurations": {
             "production": {
-              "devServerTarget": "redux-toolkit-example:serve:production"
+              "buildTarget": "booking-app:build:production",
+              "dev": false
             }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "booking-app:build:production"
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/redux-toolkit-example-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": ["apps/booking-app/**/*.{ts,tsx,js,jsx}"]
+          }
+        }
+      }
+    },
+    "express-apollo-server": {
+      "root": "apps/express-apollo-server",
+      "sourceRoot": "apps/express-apollo-server/src",
+      "projectType": "application",
+      "prefix": "express-apollo-server",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/express-apollo-server",
+            "main": "apps/express-apollo-server/src/main.ts",
+            "tsConfig": "apps/express-apollo-server/tsconfig.app.json",
+            "assets": ["apps/express-apollo-server/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/express-apollo-server/src/environments/environment.ts",
+                  "with": "apps/express-apollo-server/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "express-apollo-server:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/express-apollo-server/**/*.ts"]
           }
         }
       }
@@ -199,94 +226,6 @@
           "options": {
             "jestConfig": "apps/firebase-example/jest.config.js",
             "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "next-architecture-example": {
-      "root": "apps/next-architecture-example",
-      "sourceRoot": "apps/next-architecture-example",
-      "projectType": "application",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/next:build",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "root": "apps/next-architecture-example",
-            "outputPath": "dist/apps/next-architecture-example"
-          },
-          "configurations": {
-            "production": {}
-          }
-        },
-        "serve": {
-          "executor": "@nrwl/next:server",
-          "options": {
-            "buildTarget": "next-architecture-example:build",
-            "dev": true
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "next-architecture-example:build:production",
-              "dev": false
-            }
-          }
-        },
-        "export": {
-          "executor": "@nrwl/next:export",
-          "options": {
-            "buildTarget": "next-architecture-example:build:production"
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/next-architecture-example/**/*.{ts,tsx,js,jsx}"
-            ]
-          }
-        }
-      }
-    },
-    "api": {
-      "root": "apps/api",
-      "sourceRoot": "apps/api/src",
-      "projectType": "application",
-      "prefix": "api",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/api",
-            "main": "apps/api/src/main.ts",
-            "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "apps/api/src/environments/environment.ts",
-                  "with": "apps/api/src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "executor": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "api:build"
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/api/**/*.ts"]
           }
         }
       }
@@ -437,60 +376,17 @@
         }
       }
     },
-    "express-apollo-server": {
-      "root": "apps/express-apollo-server",
-      "sourceRoot": "apps/express-apollo-server/src",
-      "projectType": "application",
-      "prefix": "express-apollo-server",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/express-apollo-server",
-            "main": "apps/express-apollo-server/src/main.ts",
-            "tsConfig": "apps/express-apollo-server/tsconfig.app.json",
-            "assets": ["apps/express-apollo-server/src/assets"]
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "apps/express-apollo-server/src/environments/environment.ts",
-                  "with": "apps/express-apollo-server/src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "executor": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "express-apollo-server:build"
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/express-apollo-server/**/*.ts"]
-          }
-        }
-      }
-    },
-    "booking-app": {
-      "root": "apps/booking-app",
-      "sourceRoot": "apps/booking-app",
+    "next-architecture-example": {
+      "root": "apps/next-architecture-example",
+      "sourceRoot": "apps/next-architecture-example",
       "projectType": "application",
       "targets": {
         "build": {
           "executor": "@nrwl/next:build",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "root": "apps/booking-app",
-            "outputPath": "dist/apps/booking-app"
+            "root": "apps/next-architecture-example",
+            "outputPath": "dist/apps/next-architecture-example"
           },
           "configurations": {
             "production": {}
@@ -499,12 +395,12 @@
         "serve": {
           "executor": "@nrwl/next:server",
           "options": {
-            "buildTarget": "booking-app:build",
+            "buildTarget": "next-architecture-example:build",
             "dev": true
           },
           "configurations": {
             "production": {
-              "buildTarget": "booking-app:build:production",
+              "buildTarget": "next-architecture-example:build:production",
               "dev": false
             }
           }
@@ -512,13 +408,15 @@
         "export": {
           "executor": "@nrwl/next:export",
           "options": {
-            "buildTarget": "booking-app:build:production"
+            "buildTarget": "next-architecture-example:build:production"
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/booking-app/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "apps/next-architecture-example/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         }
       }
@@ -585,6 +483,185 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/react-router-auth/**/*.{ts,tsx,js,jsx}"]
+          }
+        }
+      }
+    },
+    "redux-toolkit-example": {
+      "root": "apps/redux-toolkit-example",
+      "sourceRoot": "apps/redux-toolkit-example/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/redux-toolkit-example",
+            "index": "apps/redux-toolkit-example/src/index.html",
+            "main": "apps/redux-toolkit-example/src/main.tsx",
+            "polyfills": "apps/redux-toolkit-example/src/polyfills.ts",
+            "tsConfig": "apps/redux-toolkit-example/tsconfig.app.json",
+            "assets": [
+              "apps/redux-toolkit-example/src/favicon.ico",
+              "apps/redux-toolkit-example/src/assets"
+            ],
+            "styles": [],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/redux-toolkit-example/src/environments/environment.ts",
+                  "with": "apps/redux-toolkit-example/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "redux-toolkit-example:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "redux-toolkit-example:build:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/redux-toolkit-example/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/redux-toolkit-example"],
+          "options": {
+            "jestConfig": "apps/redux-toolkit-example/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "redux-toolkit-example-e2e": {
+      "root": "apps/redux-toolkit-example-e2e",
+      "sourceRoot": "apps/redux-toolkit-example-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/redux-toolkit-example-e2e/cypress.json",
+            "tsConfig": "apps/redux-toolkit-example-e2e/tsconfig.e2e.json",
+            "devServerTarget": "redux-toolkit-example:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "redux-toolkit-example:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/redux-toolkit-example-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "rhf-example": {
+      "root": "apps/rhf-example",
+      "sourceRoot": "apps/rhf-example/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/rhf-example",
+            "index": "apps/rhf-example/src/index.html",
+            "main": "apps/rhf-example/src/main.tsx",
+            "polyfills": "apps/rhf-example/src/polyfills.ts",
+            "tsConfig": "apps/rhf-example/tsconfig.app.json",
+            "assets": [
+              "apps/rhf-example/src/favicon.ico",
+              "apps/rhf-example/src/assets"
+            ],
+            "styles": ["apps/rhf-example/src/styles.css"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/rhf-example/src/environments/environment.ts",
+                  "with": "apps/rhf-example/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "rhf-example:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "rhf-example:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/rhf-example/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/rhf-example"],
+          "options": {
+            "jestConfig": "apps/rhf-example/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }

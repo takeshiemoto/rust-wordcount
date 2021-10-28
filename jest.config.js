@@ -4,5 +4,6 @@ module.exports = {
     '<rootDir>/apps/firebase-example',
     '<rootDir>/apps/nest-graphql-api',
     '<rootDir>/apps/next-apollo',
+    '<rootDir>/apps/rhf-example',
   ],
 };

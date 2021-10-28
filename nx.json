@@ -29,20 +29,16 @@
     }
   },
   "projects": {
-    "redux-toolkit-example": {
+    "api": {
       "tags": []
     },
-    "redux-toolkit-example-e2e": {
-      "tags": [],
-      "implicitDependencies": ["redux-toolkit-example"]
+    "booking-app": {
+      "tags": []
+    },
+    "express-apollo-server": {
+      "tags": []
     },
     "firebase-example": {
-      "tags": []
-    },
-    "next-architecture-example": {
-      "tags": []
-    },
-    "api": {
       "tags": []
     },
     "jwt-store": {
@@ -54,13 +50,20 @@
     "next-apollo": {
       "tags": []
     },
-    "express-apollo-server": {
-      "tags": []
-    },
-    "booking-app": {
+    "next-architecture-example": {
       "tags": []
     },
     "react-router-auth": {
+      "tags": []
+    },
+    "redux-toolkit-example": {
+      "tags": []
+    },
+    "redux-toolkit-example-e2e": {
+      "tags": [],
+      "implicitDependencies": ["redux-toolkit-example"]
+    },
+    "rhf-example": {
       "tags": []
     }
   }
