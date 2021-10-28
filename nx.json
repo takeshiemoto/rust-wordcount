@@ -28,43 +28,29 @@
       }
     }
   },
-  "projects": {
-    "api": {
-      "tags": []
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "styled-components",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "styled-components"
+      },
+      "library": {
+        "style": "styled-components",
+        "linter": "eslint"
+      }
     },
-    "booking-app": {
-      "tags": []
-    },
-    "express-apollo-server": {
-      "tags": []
-    },
-    "firebase-example": {
-      "tags": []
-    },
-    "jwt-store": {
-      "tags": []
-    },
-    "nest-graphql-api": {
-      "tags": []
-    },
-    "next-apollo": {
-      "tags": []
-    },
-    "next-architecture-example": {
-      "tags": []
-    },
-    "react-router-auth": {
-      "tags": []
-    },
-    "redux-toolkit-example": {
-      "tags": []
-    },
-    "redux-toolkit-example-e2e": {
-      "tags": [],
-      "implicitDependencies": ["redux-toolkit-example"]
-    },
-    "rhf-example": {
-      "tags": []
+    "@nrwl/next": {
+      "application": {
+        "style": "styled-components",
+        "linter": "eslint"
+      }
     }
   }
 }
