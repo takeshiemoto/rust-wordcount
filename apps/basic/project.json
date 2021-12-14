@@ -1,0 +1,69 @@
+{
+  "root": "apps/basic",
+  "sourceRoot": "apps/basic/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/basic",
+        "index": "apps/basic/src/index.html",
+        "baseHref": "/",
+        "main": "apps/basic/src/main.tsx",
+        "polyfills": "apps/basic/src/polyfills.ts",
+        "tsConfig": "apps/basic/tsconfig.app.json",
+        "assets": ["apps/basic/src/favicon.ico", "apps/basic/src/assets"],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/basic/src/environments/environment.ts",
+              "with": "apps/basic/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "basic:build",
+        "hmr": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "basic:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/basic/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/basic"],
+      "options": {
+        "jestConfig": "apps/basic/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
