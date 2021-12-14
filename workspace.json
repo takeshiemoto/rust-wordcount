@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
-    "basic": "apps/basic"
+    "basic": "apps/basic",
+    "global-state": "apps/global-state"
   }
 }
